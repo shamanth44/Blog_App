@@ -1,10 +1,14 @@
 import React from "react";
 import moment from "moment";
 
+import { useNavigate } from "react-router-dom";
+
+
 function Blogs({ blog }) {
+  const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col basis w-96 cursor-pointer">
+    <div className="flex flex-col basis w-96 cursor-pointer" onClick={() => {navigate(`/blog/${blog._id}`)}}>
       <img src={blog.image} alt="" className="w-96 object-cover" />
 
       <div className="flex flex-col py-2 gap-2">
@@ -22,8 +26,9 @@ function Blogs({ blog }) {
           </div>
 
           <div>
+          <p className="text-[11px] text-slate-400">Published on</p>
             <p className="text-[12px] text-slate-400">
-              {moment(blog.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
+              {moment(blog.createdAt).format("MMMM Do YYYY, h:mm a")}
             </p>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../features/user/userSlice";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -84,7 +85,7 @@ function Signup() {
           <button className="mt-8 tracking-wider border text-center text-sm text-white border-black p-2 rounded-md w-full bg-neutral-900" onClick={handleSubmit}>
             Sign Up
           </button>
-          <p className="text-center text-slate-500 text-[13px]">Already have an account? <span className="text-black underline font-bold underline-offset-4 cursor-pointer">Log in</span></p>
+          <Link to={"/signin"} className="text-center text-slate-500 text-[13px]">Already have an account? <span className="text-black underline font-bold underline-offset-4 cursor-pointer">Log in</span></Link>
           <p className="mt-14 text-center text-slate-500 text-xs">By creating an account, you agree to our <span className="underline underline-offset-3 cursor-pointer">terms of use.</span></p>
 
 
@@ -92,7 +93,7 @@ function Signup() {
 
 
         {/* right */}
-        <div className="w-6/12 relative">
+        <div className="w-6/12 relative hidden md:inline">
         <img src={"https://res.cloudinary.com/shamanth-ganiger/image/upload/v1725799759/20210512081001_IMG_0025_sb7pbk.jpg"} alt="" className=" rounded-br-[100px] w-full object-cover h-[600px]" />
         <p className="text-center tracking-wider absolute top-1/2 text-gray-100 opacity-90 font-bold text-3xl px-20">Your words have the power to change the world. Start sharing your story today.</p>
         </div>

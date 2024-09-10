@@ -10,7 +10,6 @@ function AllBLogs() {
 const dispatch = useDispatch();
 
 const blogs = useSelector((state)=> state.blogs.blogs)
-console.log(blogs)
 
   useEffect(()=>{
     dispatch(getBlogs());
@@ -21,11 +20,11 @@ console.log(blogs)
       <BlogLayout blog={blogs}  />
 
       <div className='flex flex-wrap px-20 justify-between mt-20 gap-y-10'>
-      {blogs !== null ? blogs.map((blog, index)=>{
+      {blogs.length !== 0 ? blogs.map((blog, index)=>{
         return(
             <Blogs key={index} blog={blog} />
         )
-      }) : <h1>Loading</h1>}
+      }) : <p className='text-[32px] font-semibold'>Loading</p>}
       </div>
     </div>
   )
