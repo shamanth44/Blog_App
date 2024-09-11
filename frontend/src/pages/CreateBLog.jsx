@@ -1,28 +1,35 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createBlog } from "../features/blogs/blogSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createBlog, getBlogCategory } from "../features/blogs/blogSlice";
 import { useNavigate } from "react-router-dom";
 
 function CreateBlog() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState([])
+  const [category, setCategory] = useState("")
+  const [image, setImage] = useState([]);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const blogCategory = useSelector((state)=> state.blogs.blogsCategory)
+
+  useEffect(()=>{
+    dispatch(getBlogCategory());
+  },[])
 
   const formData = new FormData();
   formData.append("title", title);
   formData.append("description", description);
-  formData.append('image', image);
-
-  const dispatch = useDispatch();
+  formData.append("category", category);
+  formData.append("image", image);
 
   const handleSubmit = async () => {
     try {
       const res = await dispatch(createBlog(formData)).unwrap();
-      console.log("redux", res)
-      navigate("/")
+      console.log("redux", res);
+      navigate("/");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   return (
@@ -36,7 +43,7 @@ function CreateBlog() {
             placeholder="name"
             className="text-black"
             onChange={(e) => {
-                setTitle(e.target.value);
+              setTitle(e.target.value);
             }}
           />
           <label htmlFor="description">Description</label>
@@ -46,9 +53,21 @@ function CreateBlog() {
             placeholder="description"
             className="text-black"
             onChange={(e) => {
-                setDescription(e.target.value);
+              setDescription(e.target.value);
             }}
           />
+          <label htmlFor="category">Select category</label>
+          <select defaultValue="" id="category" className="border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full px-3 py-2 bg-white text-gray-900"    onChange={(e) => {
+                setCategory(e.target.value);
+              }}>
+                <option value="" disabled>Select an option</option>
+            {blogCategory.map((option, index) => (
+              <option key={index} value={option.name}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+
           <label htmlFor="image">Blog Image</label>
           <input
             id="image"

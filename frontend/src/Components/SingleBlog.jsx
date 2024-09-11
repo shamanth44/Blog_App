@@ -15,6 +15,8 @@ function SingleBlog() {
     (blog) => blog._id === id
   );
 
+  console.log(blog)
+
 
   return (
     <div className="flex justify-center mt-10 h-max">

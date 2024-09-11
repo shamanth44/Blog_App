@@ -32,13 +32,34 @@ const createCategory = asyncHandler(async (req, res, next)=> {
     })
 })
 
+const getBlogCategory = asyncHandler(async (req, res, next)=> {
+
+    // const category = await Category.find().select("name")
+    const category = await Category.find()
+
+    if(!category) {
+        throw new ApiError(400, "Category not found")
+    }
+
+    return res.json({
+        category
+    })
+})
+
 const createBlog = asyncHandler(async (req, res, next)=> {
 
-    const { title, description } = req.body;
+    const { title, description, category } = req.body;
 
-    if([title, description].some((field) => field.trim() === "")) {
+    if([title, description, category].some((field) => field.trim() === "")) {
         throw new ApiError(500, "Title and description required")
     }
+
+    const blogCategory = await Category.findOne({ name: category})
+    console.log(blogCategory)
+
+    if (!blogCategory) {
+        throw new ApiError(400, "Blog category not found")
+      }
 
     let imageLocalPath;
 
@@ -48,10 +69,10 @@ const createBlog = asyncHandler(async (req, res, next)=> {
 
     const image = await uploadOnCloudinary(imageLocalPath)
 
-
     const blog = await Blog.create({
         title,
         description,
+        category: blogCategory?._id,
         image: image?.secure_url || "",
         createdBy: req.user._id
     })
@@ -64,7 +85,7 @@ const createBlog = asyncHandler(async (req, res, next)=> {
 })
 
 const getBlogs = asyncHandler(async(req, res, next)=> {
-    const blogs = await Blog.find().populate("createdBy", "name email image")
+    const blogs = await Blog.find().populate("createdBy", "name email image").populate("category")
 
     if(blogs.length === 0) {
         throw new ApiError(401, "No blogs found")
@@ -109,4 +130,4 @@ const deleteBlog = asyncHandler(async(req, res, next)=> {
 
 })
 
-module.exports = { createBlog, getBlogs, getBlog, deleteBlog, createCategory }
+module.exports = { createBlog, getBlogs, getBlog, deleteBlog, createCategory, getBlogCategory }

@@ -11,7 +11,7 @@ function Blogs({ blog }) {
     <div className="flex flex-col basis w-96 cursor-pointer" onClick={() => {navigate(`/blog/${blog._id}`)}}>
       <img src={blog.image} alt="" className="w-96 object-cover" />
 
-      <div className="flex flex-col py-2 gap-2">
+      <div className="flex flex-col py-2 h-full justify-between gap-2">
         <div className="flex justify-between">
           <div className="flex items-center gap-2">
             <img
@@ -39,6 +39,9 @@ function Blogs({ blog }) {
             ? blog.description.slice(0, 185) + "..."
             : blog.description + "..."}
         </p>
+        {/* <p className="border self-start py-[2px] px-2 rounded-full bg-gray-100 text-sm">Category</p> */}
+        <p className="border self-start py-[2px] px-2 rounded-full bg-gray-100 text-xs">{blog.category ? blog.category.name : "Not specified"}</p>
+
       </div>
     </div>
   );

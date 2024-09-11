@@ -17,7 +17,8 @@ const blogSchema = new Schema({
 
     category: {
         type: Schema.Types.ObjectId,
-        ref: "Category"
+        ref: "Category",
+        required: true
     },
 
     createdBy: {
@@ -29,8 +30,7 @@ const blogSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     }],
-
-    
+        
 },
     {
         timestamps: true

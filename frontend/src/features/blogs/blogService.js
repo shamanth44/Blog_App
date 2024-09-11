@@ -10,6 +10,17 @@ const createBlog = async(blogData)=>{
     return {response: error.response.data, success: false}
    }
 }
+
+const getBlogCategory = async()=> {
+    try {
+        const response = await axios.get('http://localhost:8000/api/blog/get-blog-category')
+        if(response.data){
+            return response.data.category
+        }
+    } catch (error) {
+        return error.response.data
+    }
+}
 const getBlogs = async()=>{
     try {
     const response = await axios.get('http://localhost:8000/api/blog/get-blogs');
@@ -23,6 +34,7 @@ const getBlogs = async()=>{
 
 
 export const blogService = {
+    createBlog,
+    getBlogCategory,
     getBlogs,
-    createBlog
 }
