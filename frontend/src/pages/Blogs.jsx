@@ -39,7 +39,6 @@ function Blogs({ blog }) {
             ? blog.description.slice(0, 185) + "..."
             : blog.description + "..."}
         </p>
-        {/* <p className="border self-start py-[2px] px-2 rounded-full bg-gray-100 text-sm">Category</p> */}
         <p className="border self-start py-[2px] px-2 rounded-full bg-gray-100 text-xs">{blog.category ? blog.category.name : "Not specified"}</p>
 
       </div>

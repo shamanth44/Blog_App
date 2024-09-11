@@ -41,7 +41,6 @@ function BlogLayout({blog}) {
                     : item.description + "..."}</p>
 
                     <p className="border self-start py-[2px] px-2 rounded-full bg-gray-100 text-xs">{item.category ? item.category.name : "Not specified"}</p>
-                    {/* <p className="border self-start py-[2px] px-2 rounded-full bg-gray-100 text-xs">Body building</p> */}
 
               </div>
               
