@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 
 import { useSelector } from "react-redux";
 
 function SingleBlog() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, []); 
+
   const { id } = useParams();
   const blog = useSelector((state) => state.blogs.blogs).find(
     (blog) => blog._id === id
   );
-  console.log(blog);
 
-  // title
-  // image
-  // created by and details createdAt
-  // descrption
 
   return (
-    <div className="flex justify-center mt-20 h-max">
+    <div className="flex justify-center mt-10 h-max">
       <div className="flex flex-col w-2/3">
         <h1 className="font-bold text-[18px]">{blog?.title}</h1>
 

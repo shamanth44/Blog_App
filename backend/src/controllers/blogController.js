@@ -1,7 +1,36 @@
+const { Category } = require("../models/blogCategoryModel");
 const { Blog } = require("../models/blogModel");
 const ApiError = require("../utils/ApiError");
 const asyncHandler = require("../utils/asyncHandler");
 const uploadOnCloudinary = require("../utils/cloudinary");
+
+const createCategory = asyncHandler(async (req, res, next)=> {
+
+    const { name, description } = req.body;
+
+    if([name, description].some((field)=> field.trim() === "")) {
+        throw new ApiError(400, "Title and name required")
+    }
+
+    let imageLocalPath;
+
+    if(req.file !== undefined) {
+        imageLocalPath = req.file.path
+    }
+
+    const image = await uploadOnCloudinary(imageLocalPath)
+
+    const blogCategory = await Category.create({
+        name,
+        description,
+        image: image?.secure_url || "",
+    })
+
+    res.json({
+        message: "Blog category created successfully",
+        blogCategory,
+    })
+})
 
 const createBlog = asyncHandler(async (req, res, next)=> {
 
@@ -80,4 +109,4 @@ const deleteBlog = asyncHandler(async(req, res, next)=> {
 
 })
 
-module.exports = { createBlog, getBlogs, getBlog, deleteBlog }
+module.exports = { createBlog, getBlogs, getBlog, deleteBlog, createCategory }

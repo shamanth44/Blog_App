@@ -15,6 +15,11 @@ const blogSchema = new Schema({
         type: String
     },
 
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: "Category"
+    },
+
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: "User"

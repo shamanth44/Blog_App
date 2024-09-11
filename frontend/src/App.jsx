@@ -22,7 +22,7 @@ function App() {
           <Route path="/create-blog" element={<CreateBlog />}/>
           <Route path="/blog/:id" element={<SingleBlog/>}/>
         </Routes>
-        {/* <Footer/> */}
+        <Footer/>
       </BrowserRouter>
     </>
   );
