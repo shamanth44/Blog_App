@@ -95,6 +95,40 @@ const getBlogs = asyncHandler(async(req, res, next)=> {
     })
 })
 
+const filterBlog = asyncHandler(async(req, res, next)=>{
+    const category  = req.query.category;
+    
+    const pipeline = [
+        {
+            $lookup: {
+              from: 'categories',
+              localField: 'category',
+              foreignField: '_id',
+              as: 'category',
+            },
+          },
+          { $unwind: '$category' },
+          {
+            $match: {
+              'category.name': category,
+            },
+          },
+    ];
+
+    const blogs = await Blog.aggregate(pipeline)
+
+    if(blogs.length === 0){
+        res.json({
+            message: "No blogs found in this category"
+        })
+    }
+    else{
+        res.json({
+            blogs
+        })
+    }
+})
+
 const getBlog = asyncHandler(async(req, res, next)=> {
     const id = req.params.id
     const blog = await Blog.findById({_id : id})
@@ -130,4 +164,4 @@ const deleteBlog = asyncHandler(async(req, res, next)=> {
 
 })
 
-module.exports = { createBlog, getBlogs, getBlog, deleteBlog, createCategory, getBlogCategory }
+module.exports = { createBlog, getBlogs, getBlog, deleteBlog, createCategory, getBlogCategory, filterBlog }

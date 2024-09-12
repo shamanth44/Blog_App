@@ -4,6 +4,7 @@ import { getBlogs } from '../features/blogs/blogSlice';
 import { useSelector } from 'react-redux';
 import BlogLayout from './BlogLayout';
 import Blogs from '../pages/Blogs';
+import CategoryButtons from './CategoryButtons';
 
 function AllBLogs() {
 
@@ -18,7 +19,7 @@ const blogs = useSelector((state)=> state.blogs.blogs)
   return (
     <div> 
       <BlogLayout blog={blogs}  />
-
+      <CategoryButtons/>
       <div className='flex flex-wrap px-20 justify-between mt-20 gap-y-10'>
       {blogs.length !== 0 ? blogs.map((blog, index)=>{
         return(
