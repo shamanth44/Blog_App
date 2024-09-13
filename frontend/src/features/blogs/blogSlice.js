@@ -10,6 +10,22 @@ export const getBlogs = createAsyncThunk("getBlogs", async(_, thunkApi)=>{
     }
 })
 
+export const filterBlogsByCategory = createAsyncThunk("filterBlogsByCategory", async (categoryId, thunkApi) => {
+    try {
+        const { success, response } = await blogService.filterBlogsByCategory(categoryId);
+        if(success){
+            return response
+        }
+        else{
+            return thunkApi.rejectWithValue(response);
+        }
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+
+
 export const getBlogCategory = createAsyncThunk("getBlogCategory", async(_, thunkApi)=>{
     try {
         const res = await blogService.getBlogCategory()
@@ -37,6 +53,7 @@ export const createBlog = createAsyncThunk("blog/create-blog", async(blogData, t
 
 const initialState = {
     blogs: [],
+    recentBlogs: [],
     blogsCategory: [],
     error: [],
     createdBLog: null,
@@ -58,12 +75,26 @@ export const blogSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.blogs = action.payload;
+            state.recentBlogs = action.payload;
             state.error = []
         }).addCase(getBlogs.rejected, (state, action)=>{
             state.isLoading = false;
             state.isError = true;
             state.isSuccess = false;
-        }).addCase(createBlog.pending, (state, action)=>{
+        }).addCase(filterBlogsByCategory.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(filterBlogsByCategory.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.blogs = action.payload;
+          })
+          .addCase(filterBlogsByCategory.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.blogs = []
+            state.error = action.payload
+          }).addCase(createBlog.pending, (state, action)=>{
             state.isLoading = true;
         }).addCase(createBlog.fulfilled, (state, action)=>{
             state.isLoading = false;

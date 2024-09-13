@@ -88,7 +88,7 @@ const getBlogs = asyncHandler(async(req, res, next)=> {
     const blogs = await Blog.find().populate("createdBy", "name email image").populate("category")
 
     if(blogs.length === 0) {
-        throw new ApiError(401, "No blogs found")
+        throw new ApiError(404, "No blogs found")
     }
     return res.json({
         blogs
@@ -115,12 +115,15 @@ const filterBlog = asyncHandler(async(req, res, next)=>{
           },
     ];
 
-    const blogs = await Blog.aggregate(pipeline)
+    let blogs = await Blog.aggregate(pipeline)
+
+    blogs = await Blog.populate(blogs, {
+        path: 'createdBy',
+        select: 'name email image',
+      });
 
     if(blogs.length === 0){
-        res.json({
-            message: "No blogs found in this category"
-        })
+        throw new ApiError(404, "No blogs not found in this category")
     }
     else{
         res.json({

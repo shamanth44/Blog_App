@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { filterBlogsByCategory, getBlogs } from "../features/blogs/blogSlice";
 
 function CategoryButtons() {
-  // const useDispatch = useDispatch();
+  const dispatch = useDispatch();
   const categories = useSelector((state) => state.blogs.blogsCategory);
   const [buttonColor, setButtonColor] = useState(null)
 
+
   useEffect(() => {
+    dispatch(getBlogs());
     if (categories.length > 0 && buttonColor === null) {
         setButtonColor("all");
     }
-  }, [categories, buttonColor]);
+  }, []);
 
-  const handleClick = (categoryId) => {
+  const handleClick = async (categoryId) => {
     setButtonColor(categoryId);
+    if (categoryId === "all") {
+      dispatch(getBlogs());
+    } else {
+      try {
+        await dispatch(filterBlogsByCategory(categoryId)).unwrap();
+      } catch (error) {
+        return error
+      }
+    }
   };
   return (
     <>
@@ -24,8 +36,8 @@ function CategoryButtons() {
                 <button
                 key={category._id}
                 className={`border px-3 py-1 rounded-full 
-                  ${buttonColor === category._id ? 'bg-black text-white' : 'bg-white text-black'}`}
-                onClick={() => handleClick(category._id)}
+                  ${buttonColor === category.name ? 'bg-black text-white' : 'bg-white text-black'}`}
+                onClick={() => handleClick(category.name)}
               >
                 {category.name}
               </button>

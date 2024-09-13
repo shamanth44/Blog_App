@@ -11,7 +11,7 @@ function SingleBlog() {
   }, []); 
 
   const { id } = useParams();
-  const blog = useSelector((state) => state.blogs.blogs).find(
+  const blog = useSelector((state) => state.blogs.recentBlogs).find(
     (blog) => blog._id === id
   );
 

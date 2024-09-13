@@ -32,9 +32,22 @@ const getBlogs = async()=>{
     }
 }
 
+const filterBlogsByCategory = async (categoryId) => {
+   try {
+     const response = await axios.get(`http://localhost:8000/api/blog/get-blogs/filter?category=${categoryId}`);
+     if(response.data){
+        return {response: response.data.blogs, success: true};
+     }
+   } catch (error) {
+        return {response: error.response, success: false};
+    
+   }
+  };
+
 
 export const blogService = {
     createBlog,
     getBlogCategory,
     getBlogs,
+    filterBlogsByCategory
 }
