@@ -21,7 +21,7 @@ const blogs = blogsRes.blogs
           return(
             <Blogs key={index} blog={blog} />
           )
-        }) : <p className='text-[32px] font-semibold'>{blogsRes.error.data.message}</p>}
+        }) : <p className='text-[32px] font-semibold'>{blogsRes.error.message}</p>}
       
       </div>
     </div>

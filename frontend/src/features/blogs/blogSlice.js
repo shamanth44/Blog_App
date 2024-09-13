@@ -17,7 +17,7 @@ export const filterBlogsByCategory = createAsyncThunk("filterBlogsByCategory", a
             return response
         }
         else{
-            return thunkApi.rejectWithValue(response);
+            return thunkApi.rejectWithValue(response.data);
         }
     } catch (error) {
         console.log(error)
@@ -45,7 +45,6 @@ export const createBlog = createAsyncThunk("blog/create-blog", async(blogData, t
             return thunkApi.rejectWithValue(response)
         }
     } catch (error) {
-        console.log(error)
         // console.log("thunk error", error.data.message)
         // thunkApi.rejectWithValue(error)
     }
@@ -104,7 +103,6 @@ export const blogSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.isSuccess = false;
-            console.log(action)
             state.error = action.payload
         }).addCase(getBlogCategory.pending, (state, action)=>{
             state.isLoading = true;
