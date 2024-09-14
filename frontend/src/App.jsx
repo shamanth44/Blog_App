@@ -9,6 +9,8 @@ import Signin from "./pages/Signin";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./Components/Footer";
 import SingleBlog from "./Components/SingleBlog";
+import OpenRoute from "./Components/OpenRoute";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
   return (
@@ -17,9 +19,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<AllBLogs />}/>
-          <Route path="/signup" element={<Signup />}/>
-          <Route path="/signin" element={<Signin />}/>
-          <Route path="/create-blog" element={<CreateBlog />}/>
+          <Route path="/signup" element={<OpenRoute><Signup /></OpenRoute>}/>
+          <Route path="/signin" element={<OpenRoute><Signin /></OpenRoute>}/>
+          <Route path="/create-blog" element={<PrivateRoute><CreateBlog /></PrivateRoute>}/>
           <Route path="/blog/:id" element={<SingleBlog/>}/>
         </Routes>
         <Footer/>
