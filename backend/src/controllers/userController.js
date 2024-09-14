@@ -61,13 +61,14 @@ const registerUser = asyncHandler(async ( req, res, next )=> {
 const getUser = asyncHandler(async (req, res, next)=> {
     
     try {
-        const user = await User.findById({_id: req.user._id}).select('-password')
+        const user = await User.findById(req.user._id).select('-password')
     
         if(!user) {
             throw new ApiError(401, "Failed to fetch user details")
         }
     
         return res.json({
+            authenticated: true,
             user
         })
     } catch (error) {

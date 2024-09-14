@@ -12,7 +12,8 @@ const recentBlogs = useSelector((state)=> state.blogs.recentBlogs)
 const blogs = blogsRes.blogs
   return (
     <div> 
-      <BlogLayout blog={recentBlogs} />
+      {recentBlogs.isLoading ? <p>Loading...</p> : 
+      <BlogLayout blog={recentBlogs} /> }
       <CategoryButtons/>
       <div className='flex flex-wrap px-20 justify-between mt-20 gap-y-10'>
         {blogsRes.isLoading ? <p>Loading...</p> : 

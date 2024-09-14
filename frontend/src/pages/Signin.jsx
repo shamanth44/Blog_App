@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
 
 //   const formData = new FormData();
 //   formData.append("email", email);
@@ -13,6 +16,7 @@ function Signin() {
   const dispatch = useDispatch( );
   const handleSubmit = async () => {
       dispatch(loginUser({email, password}));
+      navigate("/");
   };
   return (
     <>

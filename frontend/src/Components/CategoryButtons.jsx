@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterBlogsByCategory, getBlogs } from "../features/blogs/blogSlice";
+import { filterBlogsByCategory, getBlogCategory, getBlogs } from "../features/blogs/blogSlice";
 
 function CategoryButtons() {
   const dispatch = useDispatch();
@@ -10,6 +10,7 @@ function CategoryButtons() {
 
   useEffect(() => {
     dispatch(getBlogs());
+    dispatch(getBlogCategory())
     if (categories.length > 0 && buttonColor === null) {
         setButtonColor("all");
     }
@@ -30,13 +31,13 @@ function CategoryButtons() {
   return (
     <>
       <div className="flex px-20 mt-10 gap-3">
-        <button className={`border px-3 py-1 rounded-full ${buttonColor === "all" ? "bg-black text-white" : "bg-white text-black"}`} onClick={() => handleClick("all")}>All blogs</button>
+        <button className={`border px-3 py-1 rounded-full ${buttonColor === "all" ? "bg-black text-white" : "bg-white hover:bg-gray-100 text-black"}`} onClick={() => handleClick("all")}>All blogs</button>
         {categories.map((category) => {
             return(
                 <button
                 key={category._id}
                 className={`border px-3 py-1 rounded-full 
-                  ${buttonColor === category.name ? 'bg-black text-white' : 'bg-white text-black'}`}
+                  ${buttonColor === category.name ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-100'}`}
                 onClick={() => handleClick(category.name)}
               >
                 {category.name}
