@@ -11,11 +11,13 @@ import Footer from "./Components/Footer";
 import SingleBlog from "./Components/SingleBlog";
 import OpenRoute from "./Components/OpenRoute";
 import PrivateRoute from "./Components/PrivateRoute";
+import ScrollToTop from "./Components/ScrollToTop";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      <ScrollToTop/>
         <Navbar />
         <Routes>
           <Route path="/" element={<AllBLogs />}/>

@@ -11,7 +11,7 @@ const recentBlogs = useSelector((state)=> state.blogs.recentBlogs)
 
 const blogs = blogsRes.blogs
   return (
-    <div> 
+    <div className='mt-5'> 
       {recentBlogs.isLoading ? <p>Loading...</p> : 
       <BlogLayout blog={recentBlogs} /> }
       <CategoryButtons/>
