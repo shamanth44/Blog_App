@@ -15,7 +15,7 @@ function Signin() {
 
   const dispatch = useDispatch( );
   const handleSubmit = async () => {
-      dispatch(loginUser({email, password}));
+      const res = await dispatch(loginUser({email, password})).unwrap();
       navigate("/");
   };
   return (

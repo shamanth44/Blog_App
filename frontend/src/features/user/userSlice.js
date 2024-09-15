@@ -10,9 +10,12 @@ export const registerUser = createAsyncThunk("auth/register-user", async(userDat
 })
 export const loginUser = createAsyncThunk("auth/login-user", async(userData, thunkApi)=>{
     try {
-        return await authService.login(userData)
+        const { success, response } = await authService.login(userData)
+        if(success) {
+            return response
+        }
     } catch (error) {
-        return thunkApi.rejectWithValue(error)
+        return thunkApi.rejectWithValue(response)
     }
 })
 
@@ -48,7 +51,6 @@ export const authSlice = createSlice({
             state.isSuccess = true;
             state.isError = false
             state.user = action.payload
-            localStorage.setItem("token", action.payload.token )
         }).addCase(loginUser.rejected, (state, action)=>{
             state.isLoading = false;
             state.isError = true;
