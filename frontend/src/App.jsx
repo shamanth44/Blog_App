@@ -12,6 +12,7 @@ import SingleBlog from "./Components/SingleBlog";
 import OpenRoute from "./Components/OpenRoute";
 import PrivateRoute from "./Components/PrivateRoute";
 import ScrollToTop from "./Components/ScrollToTop";
+import UserProfile from "./Components/UserProfile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/signup" element={<OpenRoute><Signup /></OpenRoute>}/>
           <Route path="/signin" element={<OpenRoute><Signin /></OpenRoute>}/>
           <Route path="/create-blog" element={<PrivateRoute><CreateBlog /></PrivateRoute>}/>
+          <Route path="/profile" element={<PrivateRoute><UserProfile /></PrivateRoute>}/>
           <Route path="/blog/:id" element={<SingleBlog/>}/>
         </Routes>
         <Footer/>

@@ -5,14 +5,16 @@ import useAuth from "../features/user/auth";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [popup, setPopup] = useState(false);
   const user = useSelector((state) => state.auth.user);
-  const isAuthenticated = useAuth();
+  const { isAuthenticated, loading } = useAuth(); 
 
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
       if (offset > 20) {
         setScrolled(true);
+        setPopup(false);
       } else {
         setScrolled(false);
       }
@@ -23,6 +25,10 @@ function Navbar() {
     };
   }, []);
 
+  const handleClick = () => {
+    setPopup(!popup);
+  };
+
   return (
     <div
       className={`${
@@ -32,15 +38,17 @@ function Navbar() {
       <div className="list-none flex gap-10 items-center">
         <Link
           to={"/"}
-          className="cursor-pointer font-bold text-2xl text-blue-500 tracking-[2px]"
+          className="cursor-pointer font-bold text-2xl text-blue-700 tracking-[2px]"
         >
-          YOUR BLOG
+          ScribbleHub
         </Link>
       </div>
       <div className="flex gap-4 items-center">
         <Link
           to={"/create-blog"}
-          className={`flex text-gray-500 ${scrolled ? "text-gray-300 hover:text-gray-50" : "hover:text-black"} gap-2 cursor-pointer tracking-wider`}
+          className={`flex text-gray-500 ${
+            scrolled ? "text-gray-300 hover:text-gray-50" : "hover:text-black"
+          } gap-2 cursor-pointer tracking-wider`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,23 +69,63 @@ function Navbar() {
           </svg>
           <span className="tracking-wider">Write</span>
         </Link>
-        {isAuthenticated ? (
-          <Link>
-            <img
-              src={user?.loggedInUser?.image}
-              alt=""
-              className="w-8 h-8 object-cover rounded-full"
-            />
-          </Link>
-        ) : (
-          <Link
-            to={"/signup"}
-            className={`tracking-wider border text-center text-sm ${scrolled ? "text-neutral-900 border-white p-2 bg-white" : "text-white border-black p-2 bg-neutral-900"} rounded-full w-28`}
-          >
-            Get Started
-          </Link>
+
+        {/* Check loading state before rendering isAuthenticated content */}
+        {!loading && (
+          isAuthenticated ? (
+            <div>
+              <img
+                src={user?.loggedInUser?.image}
+                alt="user"
+                className="w-8 h-8 object-cover rounded-full cursor-pointer"
+                onClick={handleClick}
+              />
+            </div>
+          ) : (
+            <Link
+              to={"/signup"}
+              className={`tracking-wider border text-center text-sm ${
+                scrolled
+                  ? "text-neutral-900 border-white p-2 bg-white"
+                  : "text-white border-black p-2 bg-neutral-900"
+              } rounded-full w-28`}
+            >
+              Get Started
+            </Link>
+          )
         )}
       </div>
+
+      {popup && (
+        <div className="h-44 w-56 top-16 bg-white absolute -right-5 border rounded-md mr-20 shadow-lg">
+          <div className="list-none flex flex-col p-6 gap-4 text-gray-500 text-sm">
+            <Link
+              to={"/profile"}
+              className="cursor-pointer hover:text-black flex items-center gap-3"
+              onClick={() => setPopup(false)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+                aria-label="Profile"
+              >
+                <circle cx="12" cy="7" r="4.5" stroke="currentColor"></circle>
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  d="M3.5 21.5v-4.342C3.5 15.414 7.306 14 12 14s8.5 1.414 8.5 3.158V21.5"
+                ></path>
+              </svg>
+              <li>Profile</li>
+            </Link>
+            <li className="cursor-pointer hover:text-black">Sign out</li>
+            <li className="cursor-pointer hover:text-black">Help</li>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
