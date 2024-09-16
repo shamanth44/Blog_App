@@ -26,7 +26,6 @@ function CreateBlog() {
   const handleSubmit = async () => {
     try {
       const res = await dispatch(createBlog(formData)).unwrap();
-      console.log("redux", res);
       navigate("/");
     } catch (error) {
       console.log(error);

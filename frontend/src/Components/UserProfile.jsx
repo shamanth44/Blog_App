@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 
 function UserProfile() {
 
-const user = useSelector((state)=> state.auth.user.loggedInUser)
-console.log(user)
+const user = useSelector((state)=> state.auth.user.user)
+
 
   return (
     <div className='mt-20 px-20 flex flex-col gap-3'>

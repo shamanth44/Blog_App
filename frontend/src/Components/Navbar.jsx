@@ -6,8 +6,9 @@ import useAuth from "../features/user/auth";
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [popup, setPopup] = useState(false);
-  const user = useSelector((state) => state.auth.user);
-  const { isAuthenticated, loading } = useAuth(); 
+  // const user = useSelector((state) => state.auth.user);
+  // const { isAuthenticated, loading } = useAuth(); 
+  const { isAuthenticated, isLoading, user } =  useSelector((state) => state.auth)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,11 +72,11 @@ function Navbar() {
         </Link>
 
         {/* Check loading state before rendering isAuthenticated content */}
-        {!loading && (
+        {!isLoading && (
           isAuthenticated ? (
             <div>
               <img
-                src={user?.loggedInUser?.image}
+                src={user?.user?.image}
                 alt="user"
                 className="w-8 h-8 object-cover rounded-full cursor-pointer"
                 onClick={handleClick}
@@ -83,7 +84,7 @@ function Navbar() {
             </div>
           ) : (
             <Link
-              to={"/signup"}
+              to={"/signin"}
               className={`tracking-wider border text-center text-sm ${
                 scrolled
                   ? "text-neutral-900 border-white p-2 bg-white"

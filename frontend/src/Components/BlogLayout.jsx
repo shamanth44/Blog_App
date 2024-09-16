@@ -33,7 +33,7 @@ function BlogLayout({blog}) {
                      <p className="text-[11px] text-slate-400">{moment(item.createdAt).format('MMMM Do YYYY, h:mm a')}</p>
                      </div>
                     </div>
-                      <h1 className="font-bold text-[14px] hover:text-blue-700">{item.title}</h1>
+                      <h1 className="font-bold text-[14px] self-start text-gray-600 hover:text-black">{item.title}</h1>
                       <p className="text-slate-500 text-[13px]">{index === 0 && item.description?.length >= 350
                     ? item.description.slice(0, 350) + "..." 
                     : index >= 1 && item.description?.length >= 150

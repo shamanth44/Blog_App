@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../features/user/userSlice";
+import { getUser, loginUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 
 function Signin() {
@@ -16,6 +16,7 @@ function Signin() {
   const dispatch = useDispatch( );
   const handleSubmit = async () => {
       const res = await dispatch(loginUser({email, password})).unwrap();
+      const get = await dispatch(getUser()).unwrap();
       navigate("/");
   };
   return (

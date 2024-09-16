@@ -18,10 +18,20 @@ export const loginUser = createAsyncThunk("auth/login-user", async(userData, thu
         return thunkApi.rejectWithValue(response)
     }
 })
+export const getUser = createAsyncThunk("auth/get-user", async(_, thunkApi)=>{
+    try {
+        const { success, response } = await authService.getUser()
+        if(success) {
+            return response
+        }
+    } catch (error) {
+        return thunkApi.rejectWithValue(response)
+    }
+})
 
 const initialState = {
     user: null,
-    loggedInUser: null,
+    isAuthenticated: false,
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -50,8 +60,21 @@ export const authSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.isError = false
-            state.user = action.payload
+            // state.user = action.payload
+            // state.isAuthenticated = true
         }).addCase(loginUser.rejected, (state, action)=>{
+            state.isLoading = false;
+            state.isError = true;
+            state.isSuccess = false;
+        }).addCase(getUser.pending, (state, action)=>{
+            state.isLoading = true
+        }).addCase(getUser.fulfilled, (state, action)=> {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.isError = false
+            state.user = action.payload
+            state.isAuthenticated = action.payload.authenticated
+        }).addCase(getUser.rejected, (state, action)=>{
             state.isLoading = false;
             state.isError = true;
             state.isSuccess = false;

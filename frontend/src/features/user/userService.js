@@ -25,7 +25,20 @@ const login = async(userData)=>{
 }
 
 
+const getUser = async()=>{
+    try {
+        const response = await axios.get('http://localhost:8000/api/user/get-user');
+        if(response.data){
+            return {response: response.data, success: true}
+        }
+    } catch (error) {
+        return {response: error.response.data, success: false}
+    }
+}
+
+
 export const authService = {
     register,
-    login
+    login,
+    getUser
 }

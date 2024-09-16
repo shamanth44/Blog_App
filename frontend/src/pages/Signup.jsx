@@ -17,7 +17,6 @@ function Signup() {
 
   const dispatch = useDispatch();
   const handleSubmit = async () => {
-  console.log(formData);
     dispatch(registerUser(formData));
   };
   return (

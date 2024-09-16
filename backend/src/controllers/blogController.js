@@ -55,7 +55,6 @@ const createBlog = asyncHandler(async (req, res, next)=> {
     }
 
     const blogCategory = await Category.findOne({ name: category})
-    console.log(blogCategory)
 
     if (!blogCategory) {
         throw new ApiError(400, "Blog category not found")
