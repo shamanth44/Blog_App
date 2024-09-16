@@ -13,6 +13,7 @@ import OpenRoute from "./Components/OpenRoute";
 import PrivateRoute from "./Components/PrivateRoute";
 import ScrollToTop from "./Components/ScrollToTop";
 import UserProfile from "./Components/UserProfile";
+import AuthorProfile from "./Components/AuthorProfile";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/signin" element={<OpenRoute><Signin /></OpenRoute>}/>
           <Route path="/create-blog" element={<PrivateRoute><CreateBlog /></PrivateRoute>}/>
           <Route path="/profile" element={<PrivateRoute><UserProfile /></PrivateRoute>}/>
+          <Route path="/blog-author/:authorId" element={<AuthorProfile />}/>
           <Route path="/blog/:id" element={<SingleBlog/>}/>
         </Routes>
         <Footer/>
