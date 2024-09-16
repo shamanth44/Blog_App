@@ -33,7 +33,7 @@ function Blogs({ blog }) {
           </div>
         </div>
 
-        <h1 className="font-bold text-[16px] hover:text-blue-700">{blog.title}</h1>
+        <h1 className="font-bold text-[16px] self-start text-gray-600 hover:text-black">{blog.title}</h1>
         <p className="text-slate-500 text-[13px]">
           {blog.description?.length >= 185
             ? blog.description.slice(0, 185) + "..."
