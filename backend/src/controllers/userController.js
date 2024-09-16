@@ -76,6 +76,43 @@ const getUser = asyncHandler(async (req, res, next)=> {
     }
 })
 
+const getBlogAuthor = asyncHandler(async (req, res, next)=> {
+    try {
+        const { authorId } = req.params
+
+        const author = await User.findById({_id:authorId}).select("-password")
+
+        if(!author) {
+            throw new ApiError(404, "User not found")
+        }
+        
+        return res.json({
+            author
+        })
+
+    } catch (error) {
+        next(error)
+    }
+})
+
+const getAllUsers = asyncHandler(async (req, res, next)=> {
+    try {
+
+        const users = await User.find().select("-password")
+
+        if(!users) {
+            throw new ApiError(404, "Users not found")
+        }
+        
+        return res.json({
+            users
+        })
+
+    } catch (error) {
+        next(error)
+    }
+})
+
 //Login User
 const loginUser = asyncHandler(async (req, res, next)=> {
     try {
@@ -133,4 +170,4 @@ const logoutUser = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { registerUser, loginUser, getUser, logoutUser }
+module.exports = { registerUser, loginUser, getUser, getBlogAuthor, getAllUsers, logoutUser }
