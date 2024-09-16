@@ -80,7 +80,7 @@ const getBlogAuthor = asyncHandler(async (req, res, next)=> {
     try {
         const { authorId } = req.params
 
-        const author = await User.findById({_id:authorId}).select("-password")
+        const author = await User.findById({_id:authorId}).select("-password").populate("blogs")
 
         if(!author) {
             throw new ApiError(404, "User not found")

@@ -1,5 +1,6 @@
 const { Category } = require("../models/blogCategoryModel");
 const { Blog } = require("../models/blogModel");
+const { User } = require("../models/userModel");
 const ApiError = require("../utils/ApiError");
 const asyncHandler = require("../utils/asyncHandler");
 const uploadOnCloudinary = require("../utils/cloudinary");
@@ -75,6 +76,12 @@ const createBlog = asyncHandler(async (req, res, next)=> {
         image: image?.secure_url || "",
         createdBy: req.user._id
     })
+
+    await User.findByIdAndUpdate(
+        req.user._id,
+        { $push: { blogs: blog._id } },
+        { new: true } 
+      );
 
     res.json({
         blog,
