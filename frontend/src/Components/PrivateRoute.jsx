@@ -1,11 +1,12 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import useAuth from '../features/user/auth';
+import { useSelector } from 'react-redux';
 
 function PrivateRoute({children}) {
-    const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, isLoading } =  useSelector((state) => state.auth)
 
-    if(loading) {
+
+    if(isLoading) {
         // return <div className='px-20 text-3xl text-black font-bold'>Loading...</div>
         return children
     }

@@ -13,10 +13,10 @@ function Signin() {
 //   formData.append("email", email);
 //   formData.append("password", password);
 
-  const dispatch = useDispatch( );
+  const dispatch = useDispatch();
   const handleSubmit = async () => {
-      const res = await dispatch(loginUser({email, password})).unwrap();
-      const get = await dispatch(getUser()).unwrap();
+      await dispatch(loginUser({email, password})).unwrap();
+      await dispatch(getUser()).unwrap();
       navigate("/");
   };
   return (

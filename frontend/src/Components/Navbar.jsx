@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import useAuth from "../features/user/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logOutUser } from "../features/user/userSlice";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [popup, setPopup] = useState(false);
-  // const user = useSelector((state) => state.auth.user);
-  // const { isAuthenticated, loading } = useAuth(); 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isAuthenticated, isLoading, user } =  useSelector((state) => state.auth)
 
   useEffect(() => {
@@ -30,6 +30,18 @@ function Navbar() {
     setPopup(!popup);
   };
 
+  const handlePopUpClick = () => {
+    setPopup(false)
+  }
+  
+
+  const handleSubmit = async () => {
+      const res = await dispatch(logOutUser()).unwrap();
+      setPopup(false)
+      console.log(res)
+      navigate("/");
+  };
+
   return (
     <div
       className={`${
@@ -39,7 +51,7 @@ function Navbar() {
       <div className="list-none flex gap-10 items-center">
         <Link
           to={"/"}
-          className="cursor-pointer font-bold text-2xl text-blue-700 tracking-[2px]"
+          className="cursor-pointer font-bold md:text-2xl text-blue-700 tracking-[2px]"
         >
           ScribbleHub
         </Link>
@@ -48,7 +60,9 @@ function Navbar() {
         <Link
           to={"/create-blog"}
           className={`flex text-gray-500 ${
-            scrolled ? "text-gray-300 hover:text-gray-50" : "hover:text-black"
+            scrolled
+              ? "text-gray-300 hover:text-blue-500"
+              : "hover:text-blue-500"
           } gap-2 cursor-pointer tracking-wider`}
         >
           <svg
@@ -72,15 +86,15 @@ function Navbar() {
         </Link>
 
         {/* Check loading state before rendering isAuthenticated content */}
-        {!isLoading && (
-          isAuthenticated ? (
-            <div>
+        {!isLoading &&
+          (isAuthenticated ? (
+            <div className="relative cursor-pointer" onClick={handleClick}>
               <img
                 src={user?.user?.image}
                 alt="user"
-                className="w-8 h-8 object-cover rounded-full cursor-pointer"
-                onClick={handleClick}
+                className="w-8 h-8 object-cover rounded-full"
               />
+              <div className="absolute inset-0 bg-black opacity-0 hover:opacity-30 transition-all duration-200 rounded-full"></div>
             </div>
           ) : (
             <Link
@@ -93,17 +107,16 @@ function Navbar() {
             >
               Get Started
             </Link>
-          )
-        )}
+          ))}
       </div>
 
       {popup && (
-        <div className="h-44 w-56 top-16 bg-white absolute -right-5 border rounded-md mr-20 shadow-lg">
+        <div className="h-44 w-36  md:w-56 top-16 bg-white absolute -right-12 md:-right-5 border rounded-md mr-20 shadow-lg">
           <div className="list-none flex flex-col p-6 gap-4 text-gray-500 text-sm">
             <Link
               to={"/profile"}
-              className="cursor-pointer hover:text-black flex items-center gap-3"
-              onClick={() => setPopup(false)}
+              className="cursor-pointer hover:text-blue-500 flex items-center gap-3"
+              onClick={handlePopUpClick}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,8 +135,8 @@ function Navbar() {
               </svg>
               <li>Profile</li>
             </Link>
-            <li className="cursor-pointer hover:text-black">Sign out</li>
-            <li className="cursor-pointer hover:text-black">Help</li>
+            <button className="cursor-pointer self-start hover:text-blue-500"  onClick={handleSubmit}>Sign out</button>
+            <li className="cursor-pointer hover:text-blue-500">Help</li>
           </div>
         </div>
       )}

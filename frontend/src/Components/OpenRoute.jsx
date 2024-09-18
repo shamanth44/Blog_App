@@ -1,11 +1,11 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import useAuth from '../features/user/auth';
+import { useSelector } from 'react-redux';
 
 
 function OpenRoute({children}) {
-    const { isAuthenticated, loading } = useAuth();
-    if(loading){
+  const { isAuthenticated, isLoading } =  useSelector((state) => state.auth)
+    if(isLoading){
         // return <div>Loading...</div>
         return null
     }

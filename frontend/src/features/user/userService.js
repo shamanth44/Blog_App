@@ -12,10 +12,22 @@ const register = async(userData)=>{
     }
 }
 
-
 const login = async(userData)=>{
     try {
         const response = await axios.post('http://localhost:8000/api/user/login', userData);
+        if(response.data){
+            return {response: response.data, success: true}
+        }
+    } catch (error) {
+        return {response: error.response.data, success: false}
+    }
+}
+
+
+const logout = async()=>{
+    try {
+        const response = await axios.post('http://localhost:8000/api/user/logout');
+        console.log("Service",response)
         if(response.data){
             return {response: response.data, success: true}
         }
@@ -40,5 +52,6 @@ const getUser = async()=>{
 export const authService = {
     register,
     login,
-    getUser
+    getUser,
+    logout
 }

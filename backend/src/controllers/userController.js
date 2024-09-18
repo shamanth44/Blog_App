@@ -165,6 +165,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
 
     return res.clearCookie('token', options).json({
+        authenticated: false,
         message: "Logged out"
     })
 })
