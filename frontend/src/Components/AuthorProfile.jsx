@@ -51,8 +51,8 @@ function AuthorProfile() {
         <h1 className='text-4xl text-gray-800 font-semibold'>{author.name}</h1>
       </div>
       <div className='border-b-[1.7px] flex gap-6 pb-2'>
-        <button className={`${detail === "home" ? "text-blue-500 underline decoration-[1.6px]  decoration-blue-500 underline-offset-[13.2px]" : "text-gray-400"} text-sm tracking-wider`} onClick={() => handleItemClick('home')} >Home</button>
-        <button className={`${detail === "about" ? "text-blue-500 underline decoration-[1.6px]  decoration-blue-500 underline-offset-[13.2px]" : "text-gray-400"} text-sm tracking-wider`} onClick={() => handleItemClick('about')} >About</button>
+        <button className={`${detail === "home" ? "text-blue-500 underline decoration-[1.6px]  decoration-blue-500 underline-offset-[13.2px]" : "text-gray-400"} hover:text-blue-500 text-sm tracking-wider`} onClick={() => handleItemClick('home')} >Home</button>
+        <button className={`${detail === "about" ? "text-blue-500 underline decoration-[1.6px]  decoration-blue-500 underline-offset-[13.2px]" : "text-gray-400"} hover:text-blue-500 text-sm tracking-wider`} onClick={() => handleItemClick('about')} >About</button>
       </div>
 
       <div>

@@ -30,21 +30,25 @@ function CategoryButtons() {
   };
   return (
     <>
-      <div className="flex px-20 mt-10 gap-3">
-        <button className={`border px-3 py-1 rounded-full ${buttonColor === "all" ? "bg-black text-white" : "bg-white hover:bg-gray-100 text-black"}`} onClick={() => handleClick("all")}>All blogs</button>
+    <div className="px-20 mt-10">
+      <div className="flex gap-3 overflow-x-scroll scrollbar-hide">
+        <button className={`border text-xs md:text-base px-3 py-1 whitespace-nowrap rounded-full ${buttonColor === "all" ? "bg-black text-white" : "bg-white hover:bg-gray-100 text-black"}`} onClick={() => handleClick("all")}>All blogs</button>
         {categories.map((category) => {
-            return(
+          return(
+            <div>
                 <button
                 key={category._id}
-                className={`border px-3 py-1 rounded-full 
+                className={`border text-xs md:text-base px-3 py-1 rounded-full whitespace-nowrap
                   ${buttonColor === category.name ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-100'}`}
-                onClick={() => handleClick(category.name)}
-              >
+                  onClick={() => handleClick(category.name)}
+                  >
                 {category.name}
               </button>
+                </div>
             )
-        })}
+          })}
       </div>
+    </div>
     </>
   );
 }
