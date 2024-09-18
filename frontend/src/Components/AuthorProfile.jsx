@@ -7,7 +7,13 @@ import { useSelector } from 'react-redux';
 function AuthorProfile() {
 
     const [ author, setAuthor ] = useState([])
+    const [ detail, setDeatil  ] = useState('home')
     const { authorId } = useParams();
+
+
+    const handleItemClick = (item) => {
+      setDeatil(item);
+    };
 
     const blogsRes = useSelector((state)=> state.blogs)
 const blogs = blogsRes.blogs
@@ -31,21 +37,28 @@ const blogs = blogsRes.blogs
   return (
     <div className='px-20 flex justify-between border-b-[1px]'>
       {/* left */}
-      <div className='flex flex-col items-center basis-1/4 sticky top-20 h-screen'>
+      <div className='flex flex-col gap-2 basis-1/4 sticky top-20 h-screen'>
       <img src={author.image} alt="" className='w-[100px] h-[100px] object-cover rounded-full' />
-      <h1>{author.name}</h1>
-      <h1>{author.name}</h1>
-      <h1>{author.name}</h1>
-      <h1>{author.name}</h1>
-      <h1>{author.name}</h1>
-      <h1>{author.name}</h1>
-      <h1>{author.name}</h1>
-      <h1>{author.name}</h1>
+      <p className=''>{author.name}</p>
+      <p className='text-gray-500'>1456 Followers</p>
       </div>
 <div className='w-[1px] bg-gray-300'></div>
       {/* right */}
-      <div className='basis-3/5'>
-      <div className='flex flex-wrap px-20 justify-between mt-20 gap-y-10'>
+      <div className='basis-4/6 flex flex-col gap-10 py-10'>
+      <div className=''>
+        <h1 className='text-4xl text-gray-800 font-semibold'>{author.name}</h1>
+      </div>
+      <div className='border-b-[1.7px] flex gap-6 pb-2'>
+        <button className={`${detail === "home" ? "text-black underline underline-offset-[14.5px]" : "text-gray-400"} tracking-wider`} onClick={() => handleItemClick('home')} >Home</button>
+        <button className={`${detail === "about" ? "text-black underline underline-offset-[14.5px]" : "text-gray-400"} tracking-wider`} onClick={() => handleItemClick('about')} >About</button>
+      </div>
+
+      <div>
+        {detail === "home" && <p>Home</p>}
+        {detail === "about" && <p>About</p>}
+      </div>
+
+      <div className='flex flex-wrap justify-between gap-y-10'>
         {blogsRes.isLoading ? <p>Loading...</p> : 
       blogs.length >= 1 ? 
         blogs.map((blog, index)=>{
