@@ -7,22 +7,22 @@ import { useSelector } from 'react-redux';
 function AuthorProfile() {
 
     const [ author, setAuthor ] = useState([])
+    const [ loading, setLoading] = useState(true)
     const [ detail, setDeatil  ] = useState('home')
     const { authorId } = useParams();
-
 
     const handleItemClick = (item) => {
       setDeatil(item);
     };
 
     const blogsRes = useSelector((state)=> state.blogs)
-const blogs = blogsRes.blogs
-
+    const blogs = blogsRes.blogs
 
     const fetchAuthor = async () => {
         try {
           const response = await axios.get(`http://localhost:8000/api/user/get-author/${authorId}`, { withCredentials: true });
           setAuthor(response.data.author)
+          setLoading(false)
         } catch (error) {
           console.log(error)
         }
@@ -35,6 +35,8 @@ const blogs = blogsRes.blogs
       console.log(author)
 
   return (
+    <div>
+      {!loading ? 
     <div className='px-20 flex justify-between border-b-[1px]'>
       {/* left */}
       <div className='flex flex-col gap-2 basis-1/4 sticky top-20 h-screen'>
@@ -54,23 +56,28 @@ const blogs = blogsRes.blogs
       </div>
 
       <div>
-        {detail === "home" && <p>Home</p>}
+        {detail === "home" && author.blogs.length !== 0 ? author.blogs.map((blog, index)=> {
+          return(
+            <p key={index}>{blog.title}</p>
+          )
+        }) : detail === "home" && <p>No blogs found</p>}
         {detail === "about" && <p>About</p>}
       </div>
 
       <div className='flex flex-wrap justify-between gap-y-10'>
         {blogsRes.isLoading ? <p>Loading...</p> : 
       blogs.length >= 1 ? 
-        blogs.map((blog, index)=>{
-          return(
-            <Blogs key={index} blog={blog} />
-          )
-        }) : <p className='text-[32px] font-semibold'>{blogsRes.error.message}</p>}
+      blogs.map((blog, index)=>{
+        return(
+          <Blogs key={index} blog={blog} />
+        )
+      }) : <p className='text-[32px] font-semibold'>{blogsRes.error.message}</p>}
       
       </div>
       </div>
 
-    </div>
+    </div>  : <p>Loading...</p>}
+      </div>
   )
 }
 
