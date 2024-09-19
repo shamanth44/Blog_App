@@ -56,10 +56,10 @@ function Navbar() {
           ScribbleHub
         </Link>
       </div>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-3 md:gap-4 items-center">
         <Link
           to={"/create-blog"}
-          className={`flex text-gray-500 ${
+          className={`flex text-gray-500  ${
             scrolled
               ? "text-gray-300 hover:text-blue-500"
               : "hover:text-blue-500"
@@ -67,8 +67,7 @@ function Navbar() {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            className="h-5 w-5 md:h-6 md:w-6"
             fill="none"
             viewBox="0 0 24 24"
             aria-label="Write"
@@ -82,7 +81,7 @@ function Navbar() {
               d="m17.5 4.5-8.458 8.458a.25.25 0 0 0-.06.098l-.824 2.47a.25.25 0 0 0 .316.316l2.47-.823a.25.25 0 0 0 .098-.06L19.5 6.5m-2-2 2.323-2.323a.25.25 0 0 1 .354 0l1.646 1.646a.25.25 0 0 1 0 .354L19.5 6.5m-2-2 2 2"
             ></path>
           </svg>
-          <span className="tracking-wider">Write</span>
+          <span className="tracking-wider text-sm md:text-base">Write</span>
         </Link>
 
         {/* Check loading state before rendering isAuthenticated content */}
@@ -99,11 +98,11 @@ function Navbar() {
           ) : (
             <Link
               to={"/signin"}
-              className={`tracking-wider border text-center text-sm ${
+              className={`tracking-wider border text-center p-2 md:p-2 text-xs md:text-sm ${
                 scrolled
-                  ? "text-neutral-900 border-white p-2 bg-white"
-                  : "text-white border-black p-2 bg-neutral-900"
-              } rounded-full w-28`}
+                  ? "text-neutral-900 border-white bg-white"
+                  : "text-white border-black bg-neutral-900"
+              } rounded-full w-24 md:w-28`}
             >
               Get Started
             </Link>

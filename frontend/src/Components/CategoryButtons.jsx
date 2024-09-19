@@ -35,9 +35,8 @@ function CategoryButtons() {
         <button className={`border text-xs md:text-base px-3 py-1 whitespace-nowrap rounded-full ${buttonColor === "all" ? "bg-black text-white" : "bg-white hover:bg-gray-100 text-black"}`} onClick={() => handleClick("all")}>All blogs</button>
         {categories.map((category) => {
           return(
-            <div>
+            <div key={category._id}>
                 <button
-                key={category._id}
                 className={`border text-xs md:text-base px-3 py-1 rounded-full whitespace-nowrap
                   ${buttonColor === category.name ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-100'}`}
                   onClick={() => handleClick(category.name)}
