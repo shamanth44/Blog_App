@@ -37,7 +37,7 @@ function AuthorProfile() {
   return (
     <div>
       {!loading ? 
-    <div className='px-20 flex justify-between border-b-[1px]'>
+    <div className='px-16 flex justify-between border-b-[1px]'>
       {/* left */}
       <div className='flex flex-col gap-2 basis-1/4 sticky top-20 h-screen'>
       <img src={author.image} alt="" className='w-[100px] h-[100px] object-cover rounded-full' />

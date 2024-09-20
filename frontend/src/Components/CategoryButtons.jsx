@@ -30,7 +30,7 @@ function CategoryButtons() {
   };
   return (
     <>
-    <div className="px-20 mt-10">
+    <div className="px-5 md:px-16 mt-10">
       <div className="flex gap-3 overflow-x-scroll scrollbar-hide">
         <button className={`border text-xs md:text-base px-3 py-1 whitespace-nowrap rounded-full ${buttonColor === "all" ? "bg-black text-white" : "bg-white hover:bg-gray-100 text-black"}`} onClick={() => handleClick("all")}>All blogs</button>
         {categories.map((category) => {

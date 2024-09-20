@@ -7,7 +7,7 @@ function PrivateRoute({children}) {
 
 
     if(isLoading) {
-        // return <div className='px-20 text-3xl text-black font-bold'>Loading...</div>
+        // return <div className='px-16 text-3xl text-black font-bold'>Loading...</div>
         return children
     }
 

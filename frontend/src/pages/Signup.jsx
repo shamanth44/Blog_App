@@ -94,7 +94,7 @@ function Signup() {
         {/* right */}
         <div className="w-6/12 relative hidden md:inline">
         <img src={"https://res.cloudinary.com/shamanth-ganiger/image/upload/v1725799759/20210512081001_IMG_0025_sb7pbk.jpg"} alt="" className=" rounded-br-[100px] w-full object-cover h-[600px]" />
-        <p className="text-center tracking-wider absolute top-1/2 text-gray-100 opacity-90 font-bold text-3xl px-20">Your words have the power to change the world. Start sharing your story today.</p>
+        <p className="text-center tracking-wider absolute top-1/2 text-gray-100 opacity-90 font-bold text-3xl px-16">Your words have the power to change the world. Start sharing your story today.</p>
         </div>
       </div>
     </>

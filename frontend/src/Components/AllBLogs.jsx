@@ -15,7 +15,7 @@ const blogs = blogsRes.blogs
       {recentBlogs.isLoading ? <p>Loading...</p> : 
       <BlogLayout blog={recentBlogs} /> }
       <CategoryButtons/>
-      <div className='flex flex-wrap px-20 justify-between mt-20 gap-y-10'>
+      <div className='flex flex-wrap px-5 md:px-16 justify-between mt-20 gap-y-10'>
         {blogsRes.isLoading ? <p>Loading...</p> : 
       blogs.length >= 1 ? 
         blogs.map((blog, index)=>{

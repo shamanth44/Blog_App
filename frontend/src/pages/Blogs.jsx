@@ -28,7 +28,7 @@ function Blogs({ blog }) {
           <div>
           <p className="text-[11px] text-slate-400">Published on</p>
             <p className="text-[12px] text-slate-400">
-              {moment(blog.createdAt).format("MMMM Do YYYY, h:mm a")}
+              {moment(blog.createdAt).format("MMM Do YYYY")}
             </p>
           </div>
         </div>

@@ -46,7 +46,7 @@ function Navbar() {
     <div
       className={`${
         scrolled ? "bg-black bg-opacity-90" : "bg-white"
-      } sticky shadow top-0 z-10 flex justify-between items-center h-14 px-5 md:px-20 transition-all duration-300`}
+      } sticky shadow top-0 z-10 flex justify-between items-center h-14 px-5 md:px-16 transition-all duration-300`}
     >
       <div className="list-none flex gap-10 items-center">
         <Link

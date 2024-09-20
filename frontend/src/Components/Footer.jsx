@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
   return (
     <div className="py-6 mt-20">
-      <div className="flex justify-start md:justify-between px-5 md:px-20 flex-wrap">
+      <div className="flex justify-start md:justify-between px-5 md:px-16 flex-wrap">
         <div className="flex flex-col gap-2">
           <h2 className="font-bold text-xl">Sign up to our new letter</h2>
           <p className="text-[15px] text-slate-500">
@@ -25,7 +25,7 @@ function Footer() {
         </form>
       </div>
 
-      <div className="flex justify-between flex-wrap gap-3 md:gap-0 items-end px-5 md:px-20 pb-10 mt-5 md:mt-20 list-none">
+      <div className="flex justify-between flex-wrap gap-3 md:gap-0 items-end px-5 md:px-16 pb-10 mt-5 md:mt-20 list-none">
         {/* left */}
         <div className="flex gap-16 md:gap-10">
           <div className="flex flex-col gap-4">
@@ -61,7 +61,7 @@ function Footer() {
       </div>
       <hr />
 
-      <div className="flex flex-wrap justify-center px-5 md:px-20 text-[13px] text-slate-400 mt-5 md:justify-between list-none">
+      <div className="flex flex-wrap justify-center px-5 md:px-16 text-[13px] text-slate-400 mt-5 md:justify-between list-none">
         <li>Copyright &copy; 2024 Shamanth. All Rights Reserved</li>
 
         <div className="flex justify-between gap-2">

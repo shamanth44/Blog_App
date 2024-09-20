@@ -16,7 +16,6 @@ export default {
         'lg': '1080px',
         'xl': '1280px',
         '2xl': '1536px',
-        'custom-media-class': '900px',
       },
     },
   },
