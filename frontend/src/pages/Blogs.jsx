@@ -13,7 +13,7 @@ function Blogs({ blog }) {
 
       <div className="flex flex-col gap-3 p-2">
         <div className="flex justify-between">
-          <div className="flex gap-2" onClick={() => {navigate(`/blog-author/${blog.createdBy?._id}`)}}>
+          <div className="flex itemsce gap-2" onClick={() => {navigate(`/blog-author/${blog.createdBy?._id}`)}}>
             <img
               src={blog.createdBy?.image}
               alt=""

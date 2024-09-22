@@ -62,7 +62,13 @@ const getUser = asyncHandler(async (req, res, next) => {
     try {
         const user = await User.findById(req.user._id)
             .select('-password')
-            .populate('blogs')
+            .populate({
+                path: 'blogs',
+                populate: [
+                    { path: 'category', model: 'Category' },
+                    { path: 'createdBy', model: 'User' }
+                ]
+            });
     
         if (!user) {
             throw new ApiError(401, "Failed to fetch user details");
@@ -72,18 +78,24 @@ const getUser = asyncHandler(async (req, res, next) => {
             authenticated: true,
             user
         });
-
     } catch (error) {
         next(error);
     }
 });
 
 
+
 const getBlogAuthor = asyncHandler(async (req, res, next)=> {
     try {
         const { authorId } = req.params
 
-        const author = await User.findById({_id:authorId}).select("-password").populate("blogs")
+        const author = await User.findById({_id:authorId}).select("-password").populate({
+            path: 'blogs',
+            populate: [
+                { path: 'category', model: 'Category' },
+                { path: 'createdBy', model: 'User' }
+            ]
+        });
 
         if(!author) {
             throw new ApiError(404, "User not found")

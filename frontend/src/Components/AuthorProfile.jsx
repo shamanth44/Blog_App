@@ -8,7 +8,7 @@ function AuthorProfile() {
   const [author, setAuthor] = useState([]);
   const [loading, setLoading] = useState(true);
   const [detail, setDeatil] = useState("home");
-  const [ show, setShow ] = useState(true)
+  const [show, setShow] = useState(true);
   const { authorId } = useParams();
 
   const handleItemClick = (item) => {
@@ -16,11 +16,8 @@ function AuthorProfile() {
   };
 
   const showButton = () => {
-    setShow(!show)
-  }
-
-  const blogsRes = useSelector((state) => state.blogs);
-  const blogs = blogsRes.blogs;
+    setShow(!show);
+  };
 
   const fetchAuthor = async () => {
     try {
@@ -55,16 +52,28 @@ function AuthorProfile() {
                 className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] object-cover rounded-full"
               />
               <div className="whitespace-nowrap flex flex-col gap-1">
-                <p className="text-xl font-semibold md:text-base md:font-normal">{author.name}</p>
+                <p className="text-xl font-semibold md:text-base md:font-normal">
+                  {author.name}
+                </p>
                 <p className="text-gray-500">1456 Followers</p>
               </div>
             </div>
-            {show && <button onClick={showButton} className="bg-blue-700 border border-blue-700 text-white hover:bg-blue-900 px-6 py-1 rounded-full">
-              Follow
-            </button>}
-            {!show && <button onClick={showButton} className="border border-blue-700 text-blue-700 px-6 py-1 rounded-full">
-              Following
-            </button>}
+            {show && (
+              <button
+                onClick={showButton}
+                className="bg-blue-700 border border-blue-700 text-white hover:bg-blue-900 px-6 py-1 rounded-full"
+              >
+                Follow
+              </button>
+            )}
+            {!show && (
+              <button
+                onClick={showButton}
+                className="border border-blue-700 text-blue-700 px-6 py-1 rounded-full"
+              >
+                Following
+              </button>
+            )}
           </div>
 
           <div className="w-[1px] bg-gray-300 hidden sm:block"></div>
@@ -98,17 +107,14 @@ function AuthorProfile() {
               </button>
             </div>
 
-            <div>
+            <div className='grid pb-10 grid-cols-[repeat(auto-fit,_minmax(250px,_310px))] gap-10'>
               {detail === "home" && author.blogs.length !== 0
                 ? author.blogs.map((blog, index) => {
-                    return (
-                      <div key={index}>
-                        <p>{blog.title}</p>
-                      </div>
-                    );
+                    return <Blogs key={index} blog={blog} />
                   })
                 : detail === "home" && <p>No blogs found</p>}
               {detail === "about" && <p>About</p>}
+              
             </div>
           </div>
         </div>
