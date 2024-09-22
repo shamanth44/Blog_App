@@ -8,11 +8,16 @@ function AuthorProfile() {
   const [author, setAuthor] = useState([]);
   const [loading, setLoading] = useState(true);
   const [detail, setDeatil] = useState("home");
+  const [ show, setShow ] = useState(true)
   const { authorId } = useParams();
 
   const handleItemClick = (item) => {
     setDeatil(item);
   };
+
+  const showButton = () => {
+    setShow(!show)
+  }
 
   const blogsRes = useSelector((state) => state.blogs);
   const blogs = blogsRes.blogs;
@@ -54,9 +59,12 @@ function AuthorProfile() {
                 <p className="text-gray-500">1456 Followers</p>
               </div>
             </div>
-            <button className="bg-white border border-blue-700 text-blue-700 px-6 py-1 rounded-full">
+            {show && <button onClick={showButton} className="bg-blue-700 border border-blue-700 text-white hover:bg-blue-900 px-6 py-1 rounded-full">
               Follow
-            </button>
+            </button>}
+            {!show && <button onClick={showButton} className="border border-blue-700 text-blue-700 px-6 py-1 rounded-full">
+              Following
+            </button>}
           </div>
 
           <div className="w-[1px] bg-gray-300 hidden sm:block"></div>

@@ -58,23 +58,26 @@ const registerUser = asyncHandler(async ( req, res, next )=> {
 })
 
 //Get user
-const getUser = asyncHandler(async (req, res, next)=> {
-    
+const getUser = asyncHandler(async (req, res, next) => {
     try {
-        const user = await User.findById(req.user._id).select('-password')
+        const user = await User.findById(req.user._id)
+            .select('-password')
+            .populate('blogs')
     
-        if(!user) {
-            throw new ApiError(401, "Failed to fetch user details")
+        if (!user) {
+            throw new ApiError(401, "Failed to fetch user details");
         }
     
         return res.json({
             authenticated: true,
             user
-        })
+        });
+
     } catch (error) {
         next(error);
     }
-})
+});
+
 
 const getBlogAuthor = asyncHandler(async (req, res, next)=> {
     try {
