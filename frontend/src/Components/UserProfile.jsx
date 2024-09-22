@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 function UserProfile() {
 
 const user = useSelector((state)=> state.auth.user.user)
+console.log(user)
 
 
   return (

@@ -3,15 +3,19 @@ import { useSelector } from 'react-redux';
 import BlogLayout from './BlogLayout';
 import Blogs from '../pages/Blogs';
 import CategoryButtons from './CategoryButtons';
+import Landing from './Landing';
 
 function AllBLogs() {
 
 const blogsRes = useSelector((state)=> state.blogs)
 const recentBlogs = useSelector((state)=> state.blogs.recentBlogs)
+const { isAuthenticated } =  useSelector((state) => state.auth)
+
 
 const blogs = blogsRes.blogs
   return (
     <div className='mt-5'> 
+    {!isAuthenticated && <Landing/>}
       {recentBlogs.isLoading ? <p>Loading...</p> : 
       <BlogLayout blog={recentBlogs} /> }
       <CategoryButtons/>

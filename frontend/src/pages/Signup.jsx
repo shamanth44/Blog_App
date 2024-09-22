@@ -21,9 +21,9 @@ function Signup() {
   };
   return (
     <>
-      <div className="flex  justify-center items-center gap-10">
+      <div className="flex mt-10 sm:mt-0 sm:h-screen justify-center items-center gap-10">
         {/* left */}
-        <div className="flex flex-col justify-between h-full gap-6">
+        <div className="flex flex-col justify-between gap-6">
 
 
           <h2 className="font-bold text-2xl">Create Account</h2>
@@ -73,6 +73,12 @@ function Signup() {
             id="image"
             type="file"
             placeholder="Choose file"
+            className="text-slate-500
+      file:mr-4 file:py-2 file:px-4
+      file:rounded-lg file:border-0
+      file:text-sm file:font-semibold
+      file:bg-gray-100 file:text-gray-500
+      hover:file:bg-gray-200"
             onChange={(e) => {
               setImage(e.target.files[0]);
             }}
@@ -84,7 +90,7 @@ function Signup() {
           <button className="mt-8 tracking-wider border text-center text-sm text-white border-black p-2 rounded-md w-full bg-neutral-900" onClick={handleSubmit}>
             Sign Up
           </button>
-          <Link to={"/signin"} className="text-center text-slate-500 text-[13px]">Already have an account? <span className="text-black underline font-bold underline-offset-4 cursor-pointer">Log in</span></Link>
+          <Link to={"/signin"} className="text-center text-slate-500 text-[13px]">Already have an account? <span className="text-black underline font-bold underline-offset-4 cursor-pointer">Sign in</span></Link>
           <p className="mt-14 text-center text-slate-500 text-xs">By creating an account, you agree to our <span className="underline underline-offset-3 cursor-pointer">terms of use.</span></p>
 
         </div>
