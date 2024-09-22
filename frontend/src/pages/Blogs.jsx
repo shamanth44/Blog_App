@@ -8,12 +8,12 @@ function Blogs({ blog }) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col basis w-96 cursor-pointer">
-      <img src={blog.image} alt="" className="w-96 object-cover" onClick={() => {navigate(`/blog/${blog._id}`)}}/>
+    <div className="flex flex-col border rounded-lg justify-between overflow-hidden max-w-80">
+      <img src={blog.image} alt="" className="aspect-video object-cover" onClick={() => {navigate(`/blog/${blog._id}`)}}/>
 
-      <div className="flex flex-col py-2 h-full justify-between gap-2">
+      <div className="flex flex-col gap-3 p-2">
         <div className="flex justify-between">
-          <div className="flex items-center gap-2" onClick={() => {navigate(`/blog-author/${blog.createdBy?._id}`)}}>
+          <div className="flex gap-2" onClick={() => {navigate(`/blog-author/${blog.createdBy?._id}`)}}>
             <img
               src={blog.createdBy?.image}
               alt=""
@@ -33,14 +33,13 @@ function Blogs({ blog }) {
           </div>
         </div>
 
-        <h1 className="font-bold text-[16px] self-start text-gray-600 hover:text-black" onClick={() => {navigate(`/blog/${blog._id}`)}}>{blog.title}</h1>
-        <p className="text-slate-500 text-[13px]" onClick={() => {navigate(`/blog/${blog._id}`)}}>
-          {blog.description?.length >= 185
-            ? blog.description.slice(0, 185) + "..."
+        <h1 className="font-bold text-[13px] self-start text-gray-600 hover:text-black" onClick={() => {navigate(`/blog/${blog._id}`)}}>{blog.title}</h1>
+        <p className="text-slate-500 text-[12px]" onClick={() => {navigate(`/blog/${blog._id}`)}}>
+          {blog.description?.length >= 80
+            ? blog.description.slice(0, 80) + "..."
             : blog.description + "..."}
         </p>
         <p className="border self-start py-[2px] px-2 rounded-full bg-gray-100 text-xs">{blog.category ? blog.category.name : "Not specified"}</p>
-
       </div>
     </div>
   );
