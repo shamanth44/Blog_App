@@ -4,7 +4,7 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
 
-function Blogs({ blog }) {
+function Blogs({ blog, author, onDelete }) {
   const navigate = useNavigate();
 
   return (
@@ -13,7 +13,7 @@ function Blogs({ blog }) {
 
       <div className="flex flex-col gap-3 p-2">
         <div className="flex justify-between">
-          <div className="flex itemsce gap-2" onClick={() => {navigate(`/blog-author/${blog.createdBy?._id}`)}}>
+          <div className="flex items-center gap-2" onClick={() => {navigate(`/blog-author/${blog.createdBy?._id}`)}}>
             <img
               src={blog.createdBy?.image}
               alt=""
@@ -39,7 +39,10 @@ function Blogs({ blog }) {
             ? blog.description.slice(0, 80) + "..."
             : blog.description + "..."}
         </p>
-        <p className="border self-start py-[2px] px-2 rounded-full bg-gray-100 text-xs">{blog.category ? blog.category.name : "Not specified"}</p>
+        <div className="flex justify-between">
+        <p className="border py-[2px] px-2 rounded-full bg-gray-100 text-xs">{blog.category ? blog.category.name : "Not specified"}</p>
+        {author && <button className="mr-4 text-sm text-gray-600 underline" onClick={onDelete}>Delete</button>}
+        </div>
       </div>
     </div>
   );

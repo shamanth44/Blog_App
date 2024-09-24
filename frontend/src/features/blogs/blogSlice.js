@@ -24,6 +24,20 @@ export const filterBlogsByCategory = createAsyncThunk("filterBlogsByCategory", a
     }
 });
 
+export const deleteBlog = createAsyncThunk("deleteBlog", async (blogId, thunkApi) => {
+    try {
+        const { success, response } = await blogService.deleteBlog(blogId);
+        if(success){
+            return response
+        }
+        else{
+            return thunkApi.rejectWithValue(response.data);
+        }
+    } catch (error) {
+        console.log(error)
+    }
+});
+
 
 
 export const getBlogCategory = createAsyncThunk("getBlogCategory", async(_, thunkApi)=>{

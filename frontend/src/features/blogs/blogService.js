@@ -45,9 +45,23 @@ const filterBlogsByCategory = async (categoryId) => {
   };
 
 
+const deleteBlog = async (blogId) => {
+   try {
+     const response = await axios.delete(`http://localhost:8000/api/blog/delete-blog/${blogId}`);
+     if(response.data){
+        return {response: response.data, success: true};
+     }
+   } catch (error) {
+        return {response: error.response, success: false};
+    
+   }
+  };
+
+
 export const blogService = {
     createBlog,
     getBlogCategory,
     getBlogs,
-    filterBlogsByCategory
+    filterBlogsByCategory,
+    deleteBlog
 }

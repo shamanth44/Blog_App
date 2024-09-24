@@ -83,6 +83,30 @@ const getUser = asyncHandler(async (req, res, next) => {
     }
 });
 
+const getUserData = asyncHandler(async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id)
+            .select('-password')
+            .populate({
+                path: 'blogs',
+                populate: [
+                    { path: 'category', model: 'Category' },
+                    { path: 'createdBy', model: 'User' }
+                ]
+            });
+    
+        if (!user) {
+            throw new ApiError(401, "Failed to fetch user details");
+        }
+    
+        return res.json({
+            user
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
 
 
 const getBlogAuthor = asyncHandler(async (req, res, next)=> {
@@ -186,4 +210,4 @@ const logoutUser = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { registerUser, loginUser, getUser, getBlogAuthor, getAllUsers, logoutUser }
+module.exports = { registerUser, loginUser, getUser, getUserData, getBlogAuthor, getAllUsers, logoutUser }

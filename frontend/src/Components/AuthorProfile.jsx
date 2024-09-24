@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Blogs from "../pages/Blogs";
-import { useSelector } from "react-redux";
 
 function AuthorProfile() {
   const [author, setAuthor] = useState([]);
@@ -78,11 +77,11 @@ function AuthorProfile() {
             )}
           </div>
 
-      <div className="w-[1px] bg-gray-300 hidden sm:block"></div>
+      <div className="w-[0.5px] bg-gray-300 hidden sm:block"></div>
           {/* right */}
           <div className="basis-4/6 flex flex-col gap-10 px-5 pb-10 md:pl-0 md:pr-16">
           <div className="hidden md:block">
-            <img src={"https://res.cloudinary.com/shamanth-ganiger/image/upload/v1727007183/thought-catalog-505eectW54k-unsplash_c8jtsq.jpg"} alt="cover-photo" className="h-[20vh] w-full object-cover" />
+            <img src={"https://res.cloudinary.com/shamanth-ganiger/image/upload/v1727007183/thought-catalog-505eectW54k-unsplash_c8jtsq.jpg"} alt="cover-photo" className="h-[25vh] w-full object-cover" />
           </div>
             <div className="">
               <h1 className="text-4xl mt-10 text-gray-800 font-semibold hidden md:block">

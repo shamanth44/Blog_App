@@ -151,26 +151,29 @@ const getBlog = asyncHandler(async(req, res, next)=> {
     })
 })
 
-const deleteBlog = asyncHandler(async(req, res, next)=> {
+const deleteBlog = asyncHandler(async(req, res, next) => {
     const blogOwner = req.user._id
-
-    id = req.params.id
+    const id = req.params.id
     const blog = await Blog.findById({_id: id})
 
-    if(!blog) {
+    if (!blog) {
         throw new ApiError(400, "Blog not found")
     }
 
-    if(blogOwner.equals(blog.createdBy)) {
-        await Blog.findByIdAndDelete({_id : id})
+    if (blogOwner.equals(blog.createdBy)) {
+        await Blog.findByIdAndDelete({_id: id})
+
+        await User.findByIdAndUpdate(blogOwner, {
+            $pull: { blogs: id }
+        })
+
         res.json({
             message: "Blog Deleted"
         }) 
-    }
-    else{
+    } else {
         throw new ApiError(401, "Unauthorized request")
     }
-
 })
+
 
 module.exports = { createBlog, getBlogs, getBlog, deleteBlog, createCategory, getBlogCategory, filterBlog }
