@@ -35,7 +35,7 @@ function AuthorProfile() {
     fetchAuthor();
   }, []);
 
-  console.log(author);
+
 
   return (
     <div>
@@ -116,7 +116,7 @@ function AuthorProfile() {
                 ? author.blogs.map((blog, index) => {
                     return <Blogs key={index} blog={blog} />
                   })
-                : detail === "home" && <p>No blogs found</p>}
+                : detail === "home" && author.blogs.length === 0 && <p className="font-semibold text-3xl whitespace-nowrap">No Published Blogs</p>}
               {detail === "about" && <p>About</p>}
               
             </div>
@@ -130,3 +130,4 @@ function AuthorProfile() {
 }
 
 export default AuthorProfile;
+

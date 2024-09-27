@@ -59,8 +59,7 @@ function Signin() {
           <button className="mt-8 tracking-wider border text-center text-sm text-white border-black p-2 rounded-md w-full bg-neutral-900" onClick={handleSubmit}>
             Sign in
           </button>
-          <Link to={"/signup"} className="text-center text-slate-500 text-[13px]">Already have an account? <span className="text-black underline font-bold underline-offset-4 cursor-pointer">Sign up</span></Link>
-          <p className="mt-14 text-center text-slate-500 text-xs">By creating an account, you agree to our <span className="underline underline-offset-3 cursor-pointer">terms of use.</span></p>
+          <Link to={"/signup"} className="text-center text-slate-500 text-[13px]">Don't have an account? <span className="text-black underline font-bold underline-offset-4 cursor-pointer">Sign up</span></Link>
 
         </div>
       </div>

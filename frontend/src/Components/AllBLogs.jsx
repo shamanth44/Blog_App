@@ -19,7 +19,7 @@ const blogs = blogsRes.blogs
       {recentBlogs.isLoading ? <p>Loading...</p> : 
       <BlogLayout blog={recentBlogs} /> }
       <CategoryButtons/>
-      <div className='px-5 md:px-16 mt-20 grid justify-center grid-cols-[repeat(auto-fit,_minmax(250px,_310px))] gap-10'>
+      <div className='px-5 md:px-16 mt-20 grid grid-cols-[repeat(auto-fit,_minmax(250px,_310px))] gap-10'>
         {blogsRes.isLoading ? <p>Loading...</p> : 
       blogs.length >= 1 ? 
         blogs.map((blog, index)=>{

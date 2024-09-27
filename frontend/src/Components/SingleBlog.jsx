@@ -40,7 +40,9 @@ function SingleBlog() {
           </div>
         </div>
 
-        <p className="text-slate-500 text-justify text-xl tracking-wide font-thin leading-relaxed mt-4">{blog.description}</p>
+        {/* <p className="text-slate-500 text-justify text-xl tracking-wide font-thin leading-relaxed mt-4">{blog.description}</p> */}
+        <div className="mt-4" dangerouslySetInnerHTML={{ __html: blog.description }}>
+        </div>
       </div>
     </div>
   );

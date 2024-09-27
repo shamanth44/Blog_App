@@ -11,14 +11,19 @@ function UserProfile() {
 const dispatch = useDispatch();
 const [detail, setDeatil] = useState("home");
 const {userData, isLoading} = useSelector((state)=> state.auth)
-const user = userData.user
+const user = userData?.user
+console.log(user)
 
 const handleItemClick = (item) => {
   setDeatil(item);
 };
+
 useEffect(()=>{
-  dispatch(getUserData())
-},[dispatch])
+  async function getUser() {
+    await dispatch(getUserData()).unwrap()
+  }
+  getUser();
+},[])
 
 const handleDelete = async (blogId) => {
   await dispatch(deleteBlog(blogId)).unwrap()
@@ -28,7 +33,7 @@ const handleDelete = async (blogId) => {
 
   return (
     <div>
-      {!isLoading ? (
+      {!isLoading && user !== null ? (
         <div className="flex flex-col md:flex-row justify-between border-b-[1px]">
           {/* left */}
           <div className="md:hidden block">
@@ -37,13 +42,13 @@ const handleDelete = async (blogId) => {
           <div className="px-5 md:pl-16 flex justify-between md:justify-start md:flex-col gap-6 items-start sm:basis-1/4 md:sticky top-20 mt-10 md:h-screen">
             <div className="flex items-center md:flex-col gap-5">
               <img
-                src={user.image}
+                src={user?.image}
                 alt=""
                 className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] object-cover rounded-full"
               />
               <div className="whitespace-nowrap flex flex-col gap-1">
                 <p className="text-xl font-semibold md:text-base md:font-normal">
-                  {user.name}
+                  {user?.name}
                 </p>
                 <p className="text-gray-500">1456 Followers</p>
               </div>
@@ -58,7 +63,7 @@ const handleDelete = async (blogId) => {
           </div>
             <div className="">
               <h1 className="text-4xl mt-10 text-gray-800 font-semibold hidden md:block">
-                {user.name}
+                {user?.name}
               </h1>
             </div>
             <div className="border-b-[1.7px] flex gap-6 pb-2">
@@ -84,12 +89,12 @@ const handleDelete = async (blogId) => {
               </button>
             </div>
 
-            <div className='grid grid-cols-[repeat(auto-fit,_minmax(250px,_310px))] gap-10'>
-              {detail === "home" && user.blogs.length !== 0
-                ? user.blogs.map((blog, index) => {
+            <div className='grid grid-cols-[repeat(auto-fit,_minmax(250px,_280px))] gap-10'>
+              {detail === "home" && user?.blogs?.length !== 0
+                ? user?.blogs?.map((blog, index) => {
                     return <Blogs key={index} author={true} blog={blog} onDelete={()=> handleDelete(blog._id)} />
                   })
-                : detail === "home" && <p>No blogs found</p>}
+                : detail === "home" && user?.blogs?.length === 0 && <p className='font-extrabold text-3xl whitespace-nowrap'>No Published Blogs</p>}
               {detail === "about" && <p>About</p>}
               
             </div>

@@ -129,7 +129,7 @@ const filterBlog = asyncHandler(async(req, res, next)=>{
       });
 
     if(blogs.length === 0){
-        throw new ApiError(404, "No blogs not found in this category")
+        throw new ApiError(404, "No blogs found in this category")
     }
     else{
         res.json({

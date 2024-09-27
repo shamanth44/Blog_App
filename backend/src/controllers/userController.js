@@ -22,8 +22,17 @@ const registerUser = asyncHandler(async ( req, res, next )=> {
     try {
         const { name, email, password } = req.body
     
-        if([name, email, password].some((field) => field.trim() === "")) {
-            throw new ApiError(400, "All fields are required");
+        // if([name, email, password].some((field) => field.trim() === "")) {
+        //     throw new ApiError(400, "All fields are required");
+        // }
+        if(!name) {
+            throw new ApiError(400, "Name is required")
+        }
+        if(!email) {
+            throw new ApiError(400, "Email is required")
+        }
+        if(!password) {
+            throw new ApiError(400, "Password is required")
         }
     
         let imageLocalPath;

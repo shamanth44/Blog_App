@@ -3,9 +3,15 @@ import { authService } from "./userService";
 
 export const registerUser = createAsyncThunk("auth/register-user", async(userData, thunkApi)=>{
     try {
-        return await authService.register(userData)
+        const { success, response} = await authService.register(userData)
+        if(success){
+            return response
+        }
+        else{
+        return thunkApi.rejectWithValue(response)
+        }
     } catch (error) {
-        return thunkApi.rejectWithValue(error)
+        // return thunkApi.rejectWithValue(error)
     }
 })
 
@@ -57,9 +63,9 @@ const initialState = {
     user: null,
     userData: null,
     isAuthenticated: false,
+    isLoading: false,
     isError: false,
     isSuccess: false,
-    isLoading: false,
     message: "" 
 }
 
@@ -69,7 +75,7 @@ export const authSlice = createSlice({
     reducers:{},
     extraReducers:(builder)=>{
         builder.addCase(registerUser.pending, (state, action)=>{
-            state.isLoading = true
+            state.isLoading = false
         }).addCase(registerUser.fulfilled, (state, action)=> {
             state.isLoading = false;
             state.isSuccess = true;
@@ -77,7 +83,7 @@ export const authSlice = createSlice({
             state.user = action.payload
         }).addCase(registerUser.rejected, (state, action)=>{
             state.isLoading = false;
-            state.isError = true;
+            state.isError = false;
             state.isSuccess = false;
         }).addCase(loginUser.pending, (state, action)=>{
             state.isLoading = true
@@ -117,6 +123,7 @@ export const authSlice = createSlice({
         }).addCase(logOutUser.fulfilled, (state, action)=> {
             state.isAuthenticated = action.payload.authenticated;
             state.user = null;
+            state.userData = null;
             state.isLoading = false;
             state.isSuccess = true;
             state.isError = false
