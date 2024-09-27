@@ -89,9 +89,12 @@ function Signin() {
           {/* Server Error Message */}
           {serverError && <p className="text-red-600">{serverError}</p>}
         </div>
-          <button disabled={isSubmitting || loading} className="mt-8 tracking-wider border text-center text-sm text-white border-black p-2 rounded-md w-full bg-neutral-900">
-            Sign in
-          </button>
+        <button  disabled={isSubmitting || loading}
+              type="submit"
+              className={`mt-8 tracking-wider border text-center text-sm text-white  p-2 rounded-md w-full bg-neutral-900 border-black}`}
+            >
+              {!loading ? "Sign in": "Signing in..."}
+            </button>
           <Link to={"/signup"} className="text-center text-slate-500 text-[13px]">Don't have an account? <span className="text-black underline font-bold underline-offset-4 cursor-pointer">Sign up</span></Link>
 
         </div>

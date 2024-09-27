@@ -39,7 +39,7 @@ const handleDelete = async (blogId) => {
           <div className="md:hidden block">
             <img src={"https://res.cloudinary.com/shamanth-ganiger/image/upload/v1727007183/thought-catalog-505eectW54k-unsplash_c8jtsq.jpg"} alt="cover-photo" className="h-[20vh] w-full object-cover" />
           </div>
-          <div className="px-5 md:pl-16 flex justify-between md:justify-start md:flex-col gap-6 items-start sm:basis-1/4 md:sticky top-20 mt-10 md:h-screen">
+          <div className="px-5 md:pl-16 flex justify-between md:justify-start flex-col gap-6 items-start sm:basis-1/4 md:sticky top-20 mt-10 md:h-screen">
             <div className="flex items-center md:flex-col gap-5">
               <img
                 src={user?.image}

@@ -10,6 +10,8 @@ function CreateBlog() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState([]);
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -26,13 +28,16 @@ function CreateBlog() {
   formData.append("image", image);
 
   const handleSubmit = async () => {
-    try {
-      const res = await dispatch(createBlog(formData)).unwrap();
-      console.log("res", res)
-      navigate("/");
-    } catch (error) {
-      console.log("error", error);
-    }
+    setLoading(true)
+      try {
+        const res = await dispatch(createBlog(formData)).unwrap();
+        console.log("res", res)
+        navigate("/");
+      } catch (error) {
+        setError(error.message)
+        setLoading(false)
+        console.log("error", error);
+      }
   };
   return (
     <>
@@ -99,12 +104,16 @@ function CreateBlog() {
           }}
         />
        </div>
-        <button
-          className="bg-black self-start px-4 py-2 rounded-lg text-white mt-10"
-          onClick={handleSubmit}
-        >
-          Create Blog
-        </button>
+       {error && <p className="text-red-600 text-sm">{error}</p>}
+       <div className="self-start">
+       <button  disabled={loading}
+              type="submit"
+              onClick={handleSubmit}
+              className={`mt-4 tracking-wider border text-center text-sm text-white  p-2 rounded-md w-full bg-neutral-900 border-black}`}
+            >
+              {!loading ? "Publish": "Publishing..."}
+            </button>
+       </div>
       </div>
     </>
   );

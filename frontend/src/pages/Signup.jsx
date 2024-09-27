@@ -19,7 +19,6 @@ function Signup() {
     formData.append("password", data.password);
     formData.append('image', data.image[0]);
 
-  setTimeout(async() => {
       try {
         const res = await dispatch(registerUser(formData)).unwrap();
         console.log(res);
@@ -43,7 +42,6 @@ function Signup() {
         }
         setLoading(false)
       }
-  }, 2000);
   };
 
   return (
