@@ -21,8 +21,11 @@ export const loginUser = createAsyncThunk("auth/login-user", async(userData, thu
         if(success) {
             return response
         }
+        else{
+            return thunkApi.rejectWithValue(response)
+        }
     } catch (error) {
-        return thunkApi.rejectWithValue(response)
+        // return thunkApi.rejectWithValue(response)
     }
 })
 
@@ -86,17 +89,17 @@ export const authSlice = createSlice({
             state.isError = false;
             state.isSuccess = false;
         }).addCase(loginUser.pending, (state, action)=>{
-            state.isLoading = true
+            state.isLoading = false
         }).addCase(loginUser.fulfilled, (state, action)=> {
             state.isLoading = false;
             state.isSuccess = true;
             state.isError = false
         }).addCase(loginUser.rejected, (state, action)=>{
             state.isLoading = false;
-            state.isError = true;
+            state.isError = false;
             state.isSuccess = false;
         }).addCase(getUser.pending, (state, action)=>{
-            state.isLoading = true
+            state.isLoading = false
         }).addCase(getUser.fulfilled, (state, action)=> {
             state.isLoading = false;
             state.isSuccess = true;
@@ -105,7 +108,7 @@ export const authSlice = createSlice({
             state.isAuthenticated = action.payload.authenticated
         }).addCase(getUser.rejected, (state, action)=>{
             state.isLoading = false;
-            state.isError = true;
+            state.isError = false;
             state.isSuccess = false;
         }).addCase(getUserData.pending, (state, action)=>{
             state.isLoading = true

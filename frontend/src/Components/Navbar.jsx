@@ -85,7 +85,7 @@ function Navbar() {
         </Link>
 
         {/* Check loading state before rendering isAuthenticated content */}
-        {!isLoading &&
+        {
           (isAuthenticated ? (
             <div className="relative cursor-pointer" onClick={handleClick}>
               <img
