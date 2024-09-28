@@ -47,8 +47,8 @@ function Signup() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex mt-10 sm:mt-0 sm:h-screen justify-center items-center gap-10">
-          <div className="flex flex-col justify-between gap-6">
+        <div className="flex mt-10 justify-center items-center gap-10">
+          <div className="flex flex-col min-w-72 justify-between gap-6">
             <h2 className="font-bold text-2xl">Create Account</h2>
             <div className="flex flex-col gap-2 mt-4">
               {/* Name Field */}
@@ -112,7 +112,7 @@ function Signup() {
             {/* Submit Button */}
             <button  disabled={isSubmitting || loading}
               type="submit"
-              className={`mt-8 tracking-wider border text-center text-sm text-white  p-2 rounded-md w-full bg-neutral-900 border-black}`}
+              className={`mt-8 tracking-wider text-center text-sm text-white  p-2 rounded-md w-full bg-neutral-900 hover:bg-neutral-800`}
             >
               {!loading ? "Sign Up": "Signing up..."}
             </button>

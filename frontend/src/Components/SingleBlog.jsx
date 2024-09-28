@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 
 import { useSelector } from "react-redux";
 
 function SingleBlog() {
+  const navigate = useNavigate();
 
   const { id } = useParams();
   const blog = useSelector((state) => state.blogs.recentBlogs).find(
@@ -12,22 +13,22 @@ function SingleBlog() {
   );
 
   return (
-    <div className="flex justify-center mt-10 h-max">
-      <div className="flex flex-col w-2/3">
+    <div className="px-5 sm:px-20 lg:px-28 xl:px-56 flex justify-center mt-10">
+      <div className="flex flex-col">
         <h1 className="font-bold text-[18px]">{blog?.title}</h1>
 
         <img src={blog?.image} alt="" className="mt-4 object-contain" />
 
-        <div className="flex gap-20 mt-3">
-          <div className="flex  gap-2">
+        <div className="flex justify-between md:justify-start md:gap-20 mt-3">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => {navigate(`/blog-author/${blog.createdBy?._id}`)}}>
             <img
               src={blog.createdBy?.image}
               alt=""
               className="w-10 h-10 rounded-full object-cover"
             />
             <div>
-              <p className="text-[13px] text-slate-600">Written by</p>
-              <p className="text-[14px] font-semibold text-slate-800">
+              <p className="text-[12px] text-slate-600">Written by</p>
+              <p className="text-[13px] font-semibold text-slate-800">
                 {blog?.createdBy.name}
               </p>
             </div>
@@ -35,7 +36,7 @@ function SingleBlog() {
           <div>
             <p className="text-[11px] text-slate-400">Published on</p>
             <p className="text-[12px] text-slate-400">
-              {moment(blog.createdAt).format("MMMM Do YYYY, h:mm a")}
+              {moment(blog.createdAt).format("MMM Do YYYY")}
             </p>
           </div>
         </div>

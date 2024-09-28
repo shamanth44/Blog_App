@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from "react-redux";
-import { getUserData } from '../features/user/userSlice';
+import { getUserData, getUser } from '../features/user/userSlice';
 import Blogs from '../pages/Blogs';
 import { deleteBlog } from '../features/blogs/blogSlice';
 
@@ -19,10 +19,12 @@ const handleItemClick = (item) => {
 };
 
 useEffect(()=>{
-  async function getUser() {
+  async function getUserProfile() {
     await dispatch(getUserData()).unwrap()
+    await dispatch(getUser()).unwrap();
+
   }
-  getUser();
+  getUserProfile();
 },[])
 
 const handleDelete = async (blogId) => {

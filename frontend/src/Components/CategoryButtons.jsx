@@ -17,17 +17,23 @@ function CategoryButtons() {
   }, []);
 
   const handleClick = async (categoryId) => {
-    setButtonColor(categoryId);
-    if (categoryId === "all") {
+    if (buttonColor === categoryId) {
+      setButtonColor("all");
       dispatch(getBlogs());
     } else {
-      try {
-        await dispatch(filterBlogsByCategory(categoryId)).unwrap();
-      } catch (error) {
-        return error
+      setButtonColor(categoryId);
+      if (categoryId === "all") {
+        dispatch(getBlogs());
+      } else {
+        try {
+          await dispatch(filterBlogsByCategory(categoryId)).unwrap();
+        } catch (error) {
+          return error;
+        }
       }
     }
   };
+  
   return (
     <>
     <div className="px-5 md:px-16 mt-10">

@@ -52,7 +52,7 @@ const registerUser = asyncHandler(async ( req, res, next )=> {
             name,
             email,
             password,
-            image: image?.secure_url || ""
+            image: image?.secure_url || undefined
         })
 
         const createdUser = await User.findOne(user._id).select("-password")

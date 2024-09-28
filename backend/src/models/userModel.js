@@ -20,7 +20,7 @@ const userSchema = new Schema({
 
     image: {
         type: String,
-        default: "https://res.cloudinary.com/shamanth-ganiger/image/upload/v1703683905/samples/two-ladies.jpg"
+        default: "https://res.cloudinary.com/shamanth-ganiger/image/upload/c_crop,w_1600,h_1600,ar_1:1/v1727552409/blank-profile-picture-973460_1920_kl51gc.png"
     },
 
     blogs: [{
