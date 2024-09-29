@@ -15,7 +15,7 @@ function BlogLayout({blog}) {
   return (
     <>
     {blog.length !== 0 ?
-      <h1 className="px-5 sm:px-16 sm:text-xl text-base font-semibold">Recent blogs</h1> : <p className="px-16 text-[32px] mt-5 font-semibold">Loading...</p>
+      <h1 className="px-5 sm:px-16 sm:text-xl text-base font-semibold">Recent blogs</h1> : <p className="px-5 md:px-16 text-[32px] mt-5 font-semibold">Loading...</p>
     }
       <div className="px-5 sm:px-16 mt-3 grid gap-6 grid-rows-4 grid-cols-1 sm:grid-rows-2 sm:grid-cols-2 xl:grid-rows-3 xl:grid-cols-2">
 

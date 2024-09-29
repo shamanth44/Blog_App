@@ -54,7 +54,7 @@ function Signin() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex mt-10 justify-center items-center gap-10">
         {/* left */}
-        <div className="flex flex-col min-w-72 justify-between gap-2">
+        <div className="flex flex-col min-w-72 max-w-72 justify-between gap-6">
 
 
           <h2 className="font-bold text-2xl">Sign in</h2>
