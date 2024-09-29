@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Blogs from "../pages/Blogs";
+import baseURL from "../config";
 
 function AuthorProfile() {
   const [author, setAuthor] = useState([]);
@@ -21,7 +22,7 @@ function AuthorProfile() {
   const fetchAuthor = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/user/get-author/${authorId}`,
+        `${baseURL}/api/user/get-author/${authorId}`,
         { withCredentials: true }
       );
       setAuthor(response.data.author);

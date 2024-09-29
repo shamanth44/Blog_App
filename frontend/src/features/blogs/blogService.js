@@ -1,8 +1,9 @@
 import axios from 'axios'
+import baseURL from '../../config'
 
 const createBlog = async(blogData)=>{
     try {
-    const response = await axios.post('http://localhost:8000/api/blog/create-blog', blogData)
+    const response = await axios.post(`${baseURL}/api/blog/create-blog`, blogData)
      if(response.data){
          return {response: response.data.blog, success: true} 
      }
@@ -13,7 +14,7 @@ const createBlog = async(blogData)=>{
 
 const getBlogCategory = async()=> {
     try {
-        const response = await axios.get('http://localhost:8000/api/blog/get-blog-category')
+        const response = await axios.get(`${baseURL}/api/blog/get-blog-category`)
         if(response.data){
             return response.data.category
         }
@@ -23,7 +24,7 @@ const getBlogCategory = async()=> {
 }
 const getBlogs = async()=>{
     try {
-    const response = await axios.get('http://localhost:8000/api/blog/get-blogs');
+    const response = await axios.get(`${baseURL}/api/blog/get-blogs`);
         if(response.data){
             return response.data.blogs
         }
@@ -34,7 +35,7 @@ const getBlogs = async()=>{
 
 const filterBlogsByCategory = async (categoryId) => {
    try {
-     const response = await axios.get(`http://localhost:8000/api/blog/get-blogs/filter?category=${categoryId}`);
+     const response = await axios.get(`${baseURL}/api/blog/get-blogs/filter?category=${categoryId}`);
      if(response.data){
         return {response: response.data.blogs, success: true};
      }
@@ -47,7 +48,7 @@ const filterBlogsByCategory = async (categoryId) => {
 
 const deleteBlog = async (blogId) => {
    try {
-     const response = await axios.delete(`http://localhost:8000/api/blog/delete-blog/${blogId}`);
+     const response = await axios.delete(`${baseURL}/api/blog/delete-blog/${blogId}`);
      if(response.data){
         return {response: response.data, success: true};
      }

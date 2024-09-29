@@ -8,7 +8,7 @@
 //   useEffect(() => {
 //     const checkAuth = async () => {
 //       try {
-//         const response = await axios.get('http://localhost:8000/api/user/get-user', { withCredentials: true });
+//         const response = await axios.get(`${baseURL}/api/user/get-user`, { withCredentials: true });
 //         setIsAuthenticated(response.data.authenticated);
 //       } catch (error) {
 //         setIsAuthenticated(false);

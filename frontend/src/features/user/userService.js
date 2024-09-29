@@ -1,9 +1,10 @@
 import axios from 'axios'
+import baseURL from '../../config';
 
 axios.defaults.withCredentials = true
 const register = async(userData)=>{
     try {
-        const response = await axios.post('http://localhost:8000/api/user/register', userData);
+        const response = await axios.post(`${baseURL}/api/user/register`, userData);
         if(response.data){
             return {response: response.data, success: true}
         }
@@ -14,7 +15,7 @@ const register = async(userData)=>{
 
 const login = async(userData)=>{
     try {
-        const response = await axios.post('http://localhost:8000/api/user/login', userData);
+        const response = await axios.post(`${baseURL}/api/user/login`, userData);
         if(response.data){
             return {response: response.data, success: true}
         }
@@ -26,7 +27,7 @@ const login = async(userData)=>{
 
 const logout = async()=>{
     try {
-        const response = await axios.post('http://localhost:8000/api/user/logout');
+        const response = await axios.post(`${baseURL}/api/user/logout`);
         console.log("Service",response)
         if(response.data){
             return {response: response.data, success: true}
@@ -39,7 +40,7 @@ const logout = async()=>{
 
 const getUser = async()=>{
     try {
-        const response = await axios.get('http://localhost:8000/api/user/get-user');
+        const response = await axios.get(`${baseURL}/api/user/get-user`);
         if(response.data){
             return {response: response.data, success: true}
         }
@@ -50,7 +51,7 @@ const getUser = async()=>{
 
 const getUserData = async()=>{
     try {
-        const response = await axios.get('http://localhost:8000/api/user/get-user-data');
+        const response = await axios.get(`${baseURL}/api/user/get-user-data`);
         if(response.data){
             return {response: response.data, success: true}
         }
