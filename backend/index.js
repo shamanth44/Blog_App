@@ -20,7 +20,7 @@ connectDB();
 
 app.use(cors({
     // origin: 'http://localhost:5173', // Allow requests from this origin
-    origin: 'http://192.168.1.3:5173', // Allow requests from this origin
+    origin: 'http://192.168.1.4:5173', // Allow requests from this origin
     credentials: true // Allow credentials (cookies, authorization headers)
 }));
 

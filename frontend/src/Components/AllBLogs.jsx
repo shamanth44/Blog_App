@@ -10,7 +10,7 @@ function AllBLogs() {
 const blogsRes = useSelector((state)=> state.blogs)
 const recentBlogs = useSelector((state)=> state.blogs.recentBlogs)
 const { isAuthenticated } =  useSelector((state) => state.auth)
-
+console.log("From client allblogs",isAuthenticated)
 
 const blogs = blogsRes.blogs
   return (

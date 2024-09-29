@@ -28,7 +28,6 @@ const login = async(userData)=>{
 const logout = async()=>{
     try {
         const response = await axios.post(`${baseURL}/api/user/logout`);
-        console.log("Service",response)
         if(response.data){
             return {response: response.data, success: true}
         }

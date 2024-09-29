@@ -90,20 +90,26 @@ export const authSlice = createSlice({
             state.isSuccess = false;
         }).addCase(loginUser.pending, (state, action)=>{
             state.isLoading = false
+            console.log("Login pending",action.payload)
         }).addCase(loginUser.fulfilled, (state, action)=> {
             state.isLoading = false;
             state.isSuccess = true;
-            state.isError = false
+            state.isError = false;
+            // console.log("Login fullfilled",action.payload)
+            console.log('Payload login:', JSON.stringify(action.payload, null, 2));
         }).addCase(loginUser.rejected, (state, action)=>{
             state.isLoading = false;
             state.isError = false;
             state.isSuccess = false;
+            console.log("Login rejected",action.payload)
         }).addCase(getUser.pending, (state, action)=>{
             state.isLoading = false
         }).addCase(getUser.fulfilled, (state, action)=> {
             state.isLoading = false;
             state.isSuccess = true;
             state.isError = false
+            // console.log("From slice",action)
+            console.log('Payload slice:', JSON.stringify(action.payload, null, 2));
             state.user = action.payload
             state.isAuthenticated = action.payload.authenticated
         }).addCase(getUser.rejected, (state, action)=>{
