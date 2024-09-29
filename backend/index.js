@@ -18,10 +18,25 @@ connectDB();
 //    credentials: true
 // }))
 
+// app.use(cors({
+//     // origin: 'http://localhost:5173',
+//     origin: 'http://192.168.1.4:5173', 
+//     credentials: true
+// }));
+
 app.use(cors({
     // origin: 'http://localhost:5173',
     origin: 'http://192.168.1.4:5173', 
-    credentials: true
+    credentials: true,
+    optionSuccessStatus: 200,
+  Headers: true,
+  exposedHeaders: 'Set-Cookie',
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+    'Access-Control-Allow-Origin',
+    'Content-Type',
+    'Authorization'
+  ]
 }));
 
 app.use(bodyParser.json())
