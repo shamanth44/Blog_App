@@ -23,7 +23,7 @@ function BlogLayout({blog}) {
           return (
             <div  key={index} className={`flex flex-col gap-1 border cursor-pointer ${index !== 0 ? "xl:flex-row rounded-lg" : ""} ${index === 0 ? "xl:row-span-3 xl:flex-col sm:flex-col rounded-lg" : ""}`}>
 
-              <img src={blog?.image} alt="img" className={`h-3/4 aspect sm:rounded-bl-none sm:rounded-tr-lg object-cover ${index !== 0 ? "xl:rounded-bl-lg sm:w-auto xl:h-auto xl:w-72 rounded-t-lg xl:rounded-tr-none sm:rounded-tr-lg sm:rounded-l-lg" : ""} ${index === 0 ? "object-cover xl:rounded-bl-none xl:h-3/4 rounded-t-lg xl:w-[700px]" : ""}`} onClick={() => {navigate(`/blog/${blog?._id}`)}} />
+              <img src={blog?.image} alt="img" className={`h-3/4 aspect-video lg:aspect-auto sm:rounded-bl-none sm:rounded-tr-lg object-cover ${index !== 0 ? "xl:rounded-bl-lg sm:w-auto xl:h-auto xl:w-72 rounded-t-lg xl:rounded-tr-none sm:rounded-tr-lg sm:rounded-l-lg" : ""} ${index === 0 ? "object-cover xl:rounded-bl-none xl:h-3/4 rounded-t-lg xl:w-[700px]" : ""}`} onClick={() => {navigate(`/blog/${blog?._id}`)}} />
 
               <div className={`flex items p-2 gap-2 ${index === 0 ? "" : ""} flex-col justify-between`}> 
                     <div className="flex justify-between">
