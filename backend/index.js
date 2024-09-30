@@ -19,8 +19,8 @@ connectDB();
 // }))
 
 app.use(cors({
-    origin: 'http://localhost:5173',
-    // origin: 'http://192.168.1.4:5173', 
+    // origin: 'http://localhost:5173',
+    origin: 'http://192.168.1.3:5173', 
     credentials: true
 }));
 
