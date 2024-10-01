@@ -2,7 +2,8 @@ const multer = require('multer')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/temp')
+        // cb(null, './public/temp') // doesn't work in vercel because of denied file system access
+        cb(null, '/tmp')
     },
 
     filename: function (req, file, cb) {
