@@ -21,7 +21,6 @@ function Signup() {
 
       try {
         const res = await dispatch(registerUser(formData)).unwrap();
-        console.log(res);
         navigate("/signin");
   
       } catch (error) {

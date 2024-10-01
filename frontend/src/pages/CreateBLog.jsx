@@ -31,12 +31,10 @@ function CreateBlog() {
     setLoading(true)
       try {
         const res = await dispatch(createBlog(formData)).unwrap();
-        console.log("res", res)
         navigate("/");
       } catch (error) {
         setError(error.message)
         setLoading(false)
-        console.log("error", error);
       }
   };
   return (

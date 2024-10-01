@@ -12,7 +12,6 @@ const dispatch = useDispatch();
 const [detail, setDeatil] = useState("home");
 const {userData, isLoading} = useSelector((state)=> state.auth)
 const user = userData?.user
-console.log(user)
 
 const handleItemClick = (item) => {
   setDeatil(item);

@@ -28,7 +28,6 @@ function Signin() {
           navigate("/");
         }
     } catch (error) {
-      console.log(error)
       if (error.message) {
         const serverMessage = error.message;
 

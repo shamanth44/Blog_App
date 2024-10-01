@@ -38,7 +38,6 @@ function Navbar() {
   const handleSubmit = async () => {
       const res = await dispatch(logOutUser()).unwrap();
       setPopup(false)
-      console.log(res)
       navigate("/");
   };
 
