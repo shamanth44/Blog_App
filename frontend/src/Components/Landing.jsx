@@ -5,7 +5,7 @@ function Landing() {
   return (
     <div className='mb-10 px-5 md:px-16'>
       <div className="relative">
-        <img src={"https://res.cloudinary.com/shamanth-ganiger/image/upload/v1727553994/thought-catalog-505eectW54k-unsplash_yajlbh.jpg"} alt="" className="h-[50vh] sm:h-[40vh] w-full object-cover rounded-2xl" loading="lazy" />
+        <img src={"https://res.cloudinary.com/shamanth-ganiger/image/upload/v1727553994/thought-catalog-505eectW54k-unsplash_yajlbh.jpg"} alt="" className="h-[380px] sm:min-h-[340px] sm:max-h-[340px] w-full object-cover rounded-2xl" loading="lazy" />
         <div className='absolute inset-0 bg-black opacity-10 rounded-2xl'></div>
         <div className='absolute px-5 sm:px-20 flex items-end bottom-10 right-10 xl:right-20 sm:w-2/3 gap-4 flex-col'>
           <span className='text-white text-xl text-end sm:text-3xl font-extrabold'>Your words have the power to change the world. Start sharing your story today.</span>
