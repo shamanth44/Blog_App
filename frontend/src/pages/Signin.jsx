@@ -79,7 +79,7 @@ function Signin() {
           <input
             id="password"
             {...register('password', { required: "Password is required" })}
-            type="text"
+            type="password"
             placeholder="password"
             className="border rounded-lg py-2 px-3 focus:border-neutral-900 focus:ring-neutral-900 focus:ring-1 focus:outline-none"
           />
